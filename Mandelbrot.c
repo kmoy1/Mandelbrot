@@ -23,6 +23,7 @@ uint64_t MandelbrotIterations(u_int64_t maxiters, ComplexNumber * point, double 
 	ComplexNumber* z = newComplexNumber(0.0,0.0); //z=0 initially.
 	for(i=0;i<maxiters;i++){
 		ComplexNumber* prod = ComplexProduct(z,z);
+		freeComplexNumber(z);
 		z = ComplexSum(prod, point);
 		numIters = numIters + 1; 
 		if(ComplexAbs(z)>=threshold){
