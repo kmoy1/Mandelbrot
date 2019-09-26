@@ -45,7 +45,7 @@ Scale is the the distance between center and the top pixel in one dimension.
 void Mandelbrot(double threshold, u_int64_t max_iterations, ComplexNumber* center, double scale, u_int64_t resolution, u_int64_t * output)
 {
 	 u_int64_t lw = 2 * resolution + 1; //length
-	 double inc = scale/(double) resolution; //2.5(i)
+	 double inc = scale/((double) resolution); //2.5(i)
 	 u_int64_t i;
 	 u_int64_t x_coord, y_coord;
 	 u_int64_t center_x = floor(lw/2); //Save center coordinates: (2,2) in testASimple
