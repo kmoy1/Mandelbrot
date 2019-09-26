@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include "ComplexNumber.h"
 #include "Mandelbrot.h"
+#include "Mandelbrot.c"
 #include <sys/types.h>
 #include <math.h>
 
