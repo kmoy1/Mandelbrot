@@ -56,6 +56,8 @@ void Mandelbrot(double threshold, u_int64_t max_iterations, ComplexNumber* cente
 	 u_int64_t dy;
 
 	 printf("INC: %d", inc);//Should be 2.5
+     printf("CENTER IN A+BI: %d %d\n", center_Re, center_Im); //Board center,a+bi
+
 	 ComplexNumber* pt = newComplexNumber(0.0,0.0);
      for(i=0;i<pow(lw,2);i++){ //Construct corresponding point C per index.
      	x_coord = floor(i/lw); //Corresponding 2D coordinate from 1D index.
