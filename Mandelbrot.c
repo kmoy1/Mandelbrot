@@ -49,7 +49,7 @@ void Mandelbrot(double threshold, u_int64_t max_iterations, ComplexNumber* cente
 	 u_int64_t dx;
 	 u_int64_t dy;
 
-	 ComplexNumber* pt = (ComplexNumber* ) malloc(sizeof(ComplexNumber)); //Holds variable points created. 
+	 ComplexNumber* pt = newComplexNumber(0.0,0.0); //Holds variable points created. 
 
      for(i=0;i<pow(lw,2);i++){ //Construct corresponding point C per index.
      	x_coord = floor(i/lw);
