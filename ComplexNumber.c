@@ -52,17 +52,18 @@ double ComplexAbs(ComplexNumber* a)
 {
 	return sqrt(pow(a->real, 2) + pow(a->imaginary, 2));
 }
-
+//Frees complex number
 void freeComplexNumber(ComplexNumber* a)
 {
 	free(a);
 	return;
 }
-
+//Gets real cmpt of complex number
 double Re(ComplexNumber* a)
 {
 	return a->real;
 }
+//gets imaginary cmpt of complex number
 double Im(ComplexNumber* a)
 {
 	return a->imaginary;
