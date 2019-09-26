@@ -33,7 +33,6 @@ uint64_t MandelbrotIterations(u_int64_t maxiters, ComplexNumber * point, double 
 		freeComplexNumber(prod);
 	}
 	freeComplexNumber(z);
-	freeComplexNumber(prod);
 	return 0;
 }
 
