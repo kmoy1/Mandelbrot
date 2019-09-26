@@ -45,7 +45,6 @@ void printUsage(char* argv[])
 	if (threshold <= 0 || scale <= 0 || max_iterations <= 0) {
 		printf("The threshold, scale, and max_iterations must be > 0");
 		printUsage(argv);
-		free(ar);
 		freeComplexNumber(center);
 		return 1;
 	}
