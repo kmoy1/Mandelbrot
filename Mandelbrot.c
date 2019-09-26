@@ -54,7 +54,7 @@ void Mandelbrot(double threshold, u_int64_t max_iterations, ComplexNumber* cente
      	dx = x_coord - center_x;
      	dy = y_coord - center_y;
      	pt = newComplexNumber(Re(center)+inc*dx, Im(center)+inc*dy);
-     	printf("%d%d\n", Re(pt), Im(pt));
+     	printf("%d %d\n", Re(pt), Im(pt));
      	*(output+i) = MandelbrotIterations(max_iterations, pt, 2.0); 
      }
 }
