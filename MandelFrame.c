@@ -27,7 +27,7 @@ void printUsage(char* argv[])
 	test_complex_number();
 
 	//STEP 1: Convert command line inputs to local variables, and ensure that inputs are valid.
-	// Check number of args
+	// Check number of arguments
 	if (argc != 8) {
 		printf("%s: Wrong number of arguments, expecting 7\n", argv[0]);
 		printUsage(argv);
@@ -36,7 +36,6 @@ void printUsage(char* argv[])
 	double threshold, scale;
 	ComplexNumber* center;
 	u_int64_t max_iterations, resolution;
-
 	threshold = atof(argv[1]);
 	max_iterations = (u_int64_t)atoi(argv[2]);
 	center = newComplexNumber(atof(argv[3]), atof(argv[4]));
@@ -84,5 +83,6 @@ void printUsage(char* argv[])
 
 	//STEP 4: Free all allocated memory
 	free(ar);
+	freeComplexNumber(center);
 	return 0;
 }
