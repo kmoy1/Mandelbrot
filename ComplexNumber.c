@@ -21,43 +21,51 @@ ComplexNumber* newComplexNumber(double real_component, double imaginary_componen
 {
     //YOUR CODE HERE
 	ComplexNumber* c_ptr = malloc(sizeof(ComplexNumber));
+	c_ptr->real = real_component;
+	c_ptr->imaginary = imaginary_component;
+	return c_ptr;
 }
 
 //Returns a pointer to a new Complex Number equal to a*b
 ComplexNumber* ComplexProduct(ComplexNumber* a, ComplexNumber* b)
 {
-    //YOUR CODE HERE
-	return NULL;
+    ComplexNumber* c_prod = malloc(sizeof(ComplexNumber));
+	int prod_real = (a->real * b->real) - (a->imaginary * b->imaginary);
+	int prod_im = (a->real * b->imaginary) + (a->imaginary*b->real);
+	c_prod->real = prod_real;
+	c_prod->imaginary = prod_im;
+	return c_prod;
 }
 
 //Returns a pointer to a new Complex Number equal to a+b
 ComplexNumber* ComplexSum(ComplexNumber* a, ComplexNumber* b)
 {
-    //YOUR CODE HERE
-	return NULL;
-}
-
+    ComplexNumber* c_sum = malloc(sizeof(ComplexNumber));
+	int sum_real = a->real + b->real;
+	int sum_im = a->imaginary + b->imaginary;
+	c_sum->real = sum_real;
+	c_sum->imaginary = sum_im;
+	return c_sum;
+}	
 //Returns the absolute value of Complex Number a
 double ComplexAbs(ComplexNumber* a)
 {
-    //YOUR CODE HERE
-	return 0;
+	return sqrt(pow(a->real, 2) + pow(a->imaginary, 2));
 }
 
 void freeComplexNumber(ComplexNumber* a)
 {
-	//YOUR CODE HERE
+	free(a);
+	return;
 }
 
 double Re(ComplexNumber* a)
 {
-	//YOUR CODE HERE
-	return 0;
+	return a->real;
 }
 double Im(ComplexNumber* a)
 {
-	//YOUR CODE HERE
-	return 0;
+	return a->imaginary;
 }
 
 
