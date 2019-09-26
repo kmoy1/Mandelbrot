@@ -44,8 +44,11 @@ void Mandelbrot(double threshold, u_int64_t max_iterations, ComplexNumber* cente
 	 u_int64_t x_coord, y_coord;
 	 u_int64_t center_x = floor(pow(lw,2)/2);
 	 u_int64_t center_y = floor(pow(lw,2)/2);
+	 double center_Re = Re(center);
+	 double center_Im = Im(center);
 	 u_int64_t dx;
 	 u_int64_t dy;
+
 	 ComplexNumber* pt = newComplexNumber(0,0);
 
      for(i=0;i<pow(lw,2);i++){ //Construct corresponding point C per index.
@@ -53,9 +56,9 @@ void Mandelbrot(double threshold, u_int64_t max_iterations, ComplexNumber* cente
      	y_coord = i % lw;
      	dx = x_coord - center_x;
      	dy = y_coord - center_y;
-     	pt = newComplexNumber(Re(center)+inc*dx, Im(center)+inc*dy);
-     	printf("%d %d\n", Re(center), Im(center));
-     	printf("%d %d\n", center_x, center_y);
+     	pt = newComplexNumber(center_Re+inc*dx, center_Im+inc*dy);
+     	printf("%d %d\n", x_coord, y_coord); //POINTS in (x,y) format. 
+     	printf("%d %d\n", Re(pt), Re(pt)); //POINTS in a+bi format. 
      	*(output+i) = MandelbrotIterations(max_iterations, pt, 2.0); 
      }
 }
