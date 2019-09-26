@@ -41,14 +41,14 @@ void Mandelbrot(double threshold, u_int64_t max_iterations, ComplexNumber* cente
 	 double inc = scale/resolution; //2.5(i)
 	 u_int64_t i;
 	 u_int64_t x_coord, y_coord;
-	 u_int64_t center_x = floor(pow(lw,2), 2);
-	 u_int64_t center_y = floor(pow(lw,2), 2);
+	 u_int64_t center_x = floor(pow(lw,2)/2);
+	 u_int64_t center_y = floor(pow(lw,2)/2);
 	 u_int64_t dx;
 	 u_int64_t dy;
 	 ComplexNumber* pt = newComplexNumber(0,0);
 
      for(i=0;i<pow(lw,2);i++){ //Construct corresponding point C per index.
-     	x_coord = floor(i,lw);
+     	x_coord = floor(i/lw);
      	y_coord = i % lw;
      	dx = x_coord - center_x;
      	dy = y_coord - center_y;
