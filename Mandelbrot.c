@@ -42,9 +42,9 @@ void Mandelbrot(double threshold, u_int64_t max_iterations, ComplexNumber* cente
 	 double inc = scale/resolution; //2.5(i)
 	 u_int64_t i;
 	 u_int64_t x_coord, y_coord;
-	 u_int64_t center_x = floor(pow(lw,2)/2);
+	 u_int64_t center_x = floor(pow(lw,2)/2); //Save center coordinates: (2,2) in testASimple
 	 u_int64_t center_y = floor(pow(lw,2)/2);
-	 double center_Re = Re(center);
+	 double center_Re = Re(center); //Save center point as a+bi
 	 double center_Im = Im(center);
 	 u_int64_t dx;
 	 u_int64_t dy;
@@ -52,11 +52,11 @@ void Mandelbrot(double threshold, u_int64_t max_iterations, ComplexNumber* cente
 	 ComplexNumber* pt = newComplexNumber(0.0,0.0); //Holds variable points created. 
 
      for(i=0;i<pow(lw,2);i++){ //Construct corresponding point C per index.
-     	x_coord = floor(i/lw);
+     	x_coord = floor(i/lw); //Corresponding 2D coordinate from 1D index.
      	y_coord = i % lw;
-     	dx = x_coord - center_x;
+     	dx = x_coord - center_x;//Displacement of point from center.
      	dy = y_coord - center_y;
-     	pt = newComplexNumber((double)center_Re+inc*dx, (double)center_Im+inc*dy);
+     	pt = newComplexNumber((double)center_Re+inc*dx, (double)center_Im+inc*dy); //Create points in a+bi
      	printf("%d %d\n", x_coord, y_coord); //POINTS in (x,y) format. 
      	printf("%d %d\n", Re(pt), Im(pt)); //POINTS in a+bi format. 
      	printf("%d\n", Re(newComplexNumber(4,3)));
