@@ -54,8 +54,9 @@ void Mandelbrot(double threshold, u_int64_t max_iterations, ComplexNumber* cente
 	 double center_Im = Im(center);
 	 u_int64_t dx;
 	 u_int64_t dy;
-
-	 printf("INC: %d", inc);//Should be 2.5
+	 printf("SCALE: %d\n", scale);
+	 printf("RESOLUTION: %d\n", resolution);
+	 printf("INC: %d\n", inc);//Should be 2.5
      printf("CENTER IN A+BI: %d + %di\n", center_Re, center_Im); //SHOULD BE 5+3i
 
 	 ComplexNumber* pt = newComplexNumber(0.0,0.0);
