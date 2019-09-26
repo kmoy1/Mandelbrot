@@ -48,8 +48,8 @@ void Mandelbrot(double threshold, u_int64_t max_iterations, ComplexNumber* cente
 	 double inc = scale/resolution; //2.5(i)
 	 u_int64_t i;
 	 u_int64_t x_coord, y_coord;
-	 u_int64_t center_x = floor(pow(lw,2)/2); //Save center coordinates: (2,2) in testASimple
-	 u_int64_t center_y = floor(pow(lw,2)/2);
+	 u_int64_t center_x = floor(lw/2); //Save center coordinates: (2,2) in testASimple
+	 u_int64_t center_y = floor(lw/2);
 	 double center_Re = Re(center); //Save center point as a+bi
 	 double center_Im = Im(center);
 	 u_int64_t dx;
