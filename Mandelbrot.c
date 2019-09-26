@@ -70,6 +70,7 @@ void Mandelbrot(double threshold, u_int64_t max_iterations, ComplexNumber* cente
      	printf("COORDINATE: %d %d\n", x_coord, y_coord); //POINTS in (x,y) format. 
      	// printf("%d %d\n", center_Re, center_Im); //Board center,a+bi
      	printf("DISPLACEMENT FROM (2,2): %d %d\n", dx, dy); //Displacements from center.
+     	printf("ADDED TO CENTER: %lf %lf", inc*dy, inc*dx);
      	// printf("%d %d\n", Re(pt), Im(pt)); //POINTS in a+bi format. 
      	*(output+i) = MandelbrotIterations(max_iterations, pt, 2.0); 
      }
