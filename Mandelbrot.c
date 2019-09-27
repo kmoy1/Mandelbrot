@@ -70,7 +70,7 @@ void Mandelbrot(double threshold, u_int64_t max_iterations, ComplexNumber* cente
      	printf("ADDED TO CENTER: %lf %lf \n", inc*dy, inc*dx);
      	freeComplexNumber(pt);
      	pt = newComplexNumber(center_Re+inc*dx,center_Im+inc*dy); //Create points in a+bi
-     	printf("index: %d, value: %lf + %lf\n", i, Re(pt), Im(pt));
+     	printf("index: %lu, value: %lf + %lf\n", i, Re(pt), Im(pt));
      	*(output+i) = MandelbrotIterations(max_iterations, pt, 2.0); 
      }
      return;
