@@ -72,5 +72,6 @@ void Mandelbrot(double threshold, u_int64_t max_iterations, ComplexNumber* cente
      	// printf("index: %lu, value: %lf + %lf\n", i, Re(pt), Im(pt));
      	*(output+i) = MandelbrotIterations(max_iterations, pt, 2.0); 
      }
+     freeComplexNumber(pt);
      return;
 }
