@@ -46,7 +46,7 @@ void Mandelbrot(double threshold, u_int64_t max_iterations, ComplexNumber* cente
 {
 	 double lw = 2 * resolution + 1; //length
 	 double inc = scale/((double) resolution); //2.5(i)
-	 double i;
+	 int i;
 	 double x_coord, y_coord;
 	 double center_x = floor(lw/2); //Save center coordinates: (2,2) in testASimple
 	 double center_y = floor(lw/2);
