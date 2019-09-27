@@ -67,7 +67,7 @@ void Mandelbrot(double threshold, u_int64_t max_iterations, ComplexNumber* cente
      	dy = y_coord - center_y;
      	printf("DISPLACEMENT FROM (2,2): %f %f\n", dx, dy); //Displacements from center.
      	printf("ADDED TO CENTER: %lf %lf \n", inc*dy, inc*dx);
-     	printf("COORDINATE: %f %f", dx, dy);
+     	printf("COORDINATE: %f %f", x_coord, y_coord);
      	freeComplexNumber(pt);
      	pt = newComplexNumber(center_Re+inc*dy,center_Im+inc*dx); //Create points in a+bi
      	printf("index: %lu, value: %lf + %lf\n", i, Re(pt), Im(pt));
