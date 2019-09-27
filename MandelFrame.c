@@ -39,7 +39,7 @@ void printUsage(char* argv[])
 	threshold = atof(argv[1]);
 	max_iterations = (u_int64_t)atoi(argv[2]);
 	center = newComplexNumber(atof(argv[3]), atof(argv[4]));
-	printf("CENTER WHEN INITIALIZED: %d + %di", Re(center), Im(center));
+	printf("CENTER WHEN INITIALIZED: %f + %fi", Re(center), Im(center));
 	scale = atof(argv[5]);
 	resolution = (u_int64_t)atoi(argv[6]);
 
