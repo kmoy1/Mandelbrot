@@ -54,8 +54,9 @@ uint8_t** FileToColorMap(char* colorfile, int* colorcount)
 		c_arr[i] = (uint8_t *) malloc(3*sizeof(uint8_t)); //allocate space for each 3-int group also
 		fscanf(cfp, "%d %d %d", &c1, &c2, &c3);//read a line.
 		printf("Adding: [%d %d %d]\n", c1,c2,c3); //sanity check 2
-		carr = {c1,c2,c3};
-		c_arr[i] = carr; //Try test with deref if fail.
+		c_arr[i][0]=c1;
+		c_arr[i][1]=c2;
+		c_arr[i][2]=c3;
 	}
 	fclose(cfp);
 	return c_arr;
