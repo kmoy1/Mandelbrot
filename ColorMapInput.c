@@ -17,7 +17,21 @@
 ***************/
 uint8_t** FileToColorMap(char* colorfile, int* colorcount)
 {
-	//YOUR CODE HERE
+	FILE* cfp = fopen(colorfile, "r");
+	if(!cfp){
+		perror("File Opening Error. Terminating.\n");
+		free(cfp);
+		return NULL;
+	}
+	int N = 0; //
+	fscanf(cfp, "%d", &N); //stores length of color array in N. 
+	printf("Array length N=%d\n", N); //sanity check
+	uint8_t** c_arr = (uint8_t**) malloc(N * sizeof(uint8_t**));//malloc a length-N 2D array for colors. 
+	for(int i=0; i<N; i++){
+		c_arr[i] = (uint8_t *) malloc(3*sizeof(uint8_t)); //allocate space for each int as well
+	}
+	
+	return c_arr;
 }
 
 
