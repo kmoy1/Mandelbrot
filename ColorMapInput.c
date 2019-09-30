@@ -17,7 +17,6 @@
 ***************/
 uint8_t** FileToColorMap(char* colorfile, int* colorcount)
 {
-	FILE* opener = fpe
 	FILE* cfp = fopen(colorfile, "r");
 	if(!cfp){//file doesn't exist/empty
 		perror("File Opening Error. Terminating.\n");
