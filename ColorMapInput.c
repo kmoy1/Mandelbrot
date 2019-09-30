@@ -24,7 +24,7 @@ uint8_t** FileToColorMap(char* colorfile, int* colorcount)
 	char c;
 	char* i1;
 	uint8_t c1,c2,c3;//Color coords
-
+	uint8_t* carr; //holds c1,c2,c3 above in array.
 	FILE* cfp = fopen(colorfile, "r");
 	if(cfp == NULL){//file doesn't exist/empty
 		printf("File Opening Error. Terminating.\n");
@@ -54,7 +54,8 @@ uint8_t** FileToColorMap(char* colorfile, int* colorcount)
 		c_arr[i] = (uint8_t *) malloc(3*sizeof(uint8_t)); //allocate space for each 3-int group also
 		fscanf(cfp, "%d %d %d", &c1, &c2, &c3);//read a line.
 		printf("Adding: [%d %d %d]\n", c1,c2,c3); //sanity check 2
-		c_arr[i] = {c1,c2,c3}; //Try test with deref if fail.
+		carr = {c1,c2,c3};
+		c_arr[i] = carr; //Try test with deref if fail.
 	}
 	fclose(cfp);
 	return c_arr;
