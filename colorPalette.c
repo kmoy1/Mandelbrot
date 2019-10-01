@@ -37,10 +37,10 @@ int P3colorpalette(char* colorfile, int width, int heightpercolor, char* outputf
 	for(i=0; i< *num_cls; i++){
 		for(j=0;j<heightpercolor;j++){
 			for(k=0; k<width;k++){//PRINT SINGLE COLOR, WIDTH TIMES.
-				// printf("%d %d %d ", color_arr[i][0], color_arr[i][1], color_arr[i][2]); //test
+				printf("%d %d %d ", color_arr[i][0], color_arr[i][1], color_arr[i][2]); //test
 				// fprintf(fpo, "%d %d %d ", color_arr[i][0], color_arr[i][1], color_arr[i][2]); //SINGLE COLOR,
 			}
-				// printf("\n");
+			printf("\n");
 			// fprintf(fpo, )
 		}
 	}
