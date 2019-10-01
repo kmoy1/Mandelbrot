@@ -32,7 +32,8 @@ int P3colorpalette(char* colorfile, int width, int heightpercolor, char* outputf
 		return 1;
 	}
 	fprintf(fpo, "P3 %d %d %d\n", width, heightpercolor * *(num_cls), 255);//test header
-	// printf("%d %d %d\n", color_arr[0][0], color_arr[0][1], color_arr[0][2]);
+		fprintf(fpo, "P3 %d %d %d\n", width, heightpercolor * *(num_cls), 255);//test header
+
 
 	for(i=0; i< *num_cls; i++){
 		for(j=0;j<heightpercolor;j++){
@@ -40,7 +41,7 @@ int P3colorpalette(char* colorfile, int width, int heightpercolor, char* outputf
 				printf("%d %d %d ", color_arr[i][0], color_arr[i][1], color_arr[i][2]); //test
 				// fprintf(fpo, "%d %d %d ", color_arr[i][0], color_arr[i][1], color_arr[i][2]); //SINGLE COLOR,
 			}
-			printf("\n");
+				printf("\n");
 			// fprintf(fpo, )
 		}
 	}
@@ -69,7 +70,7 @@ int main(int argc, char* argv[])
 	char* P6end = "/colorpaletteP6.ppm";
 	char buffer[strlen(argv[2]) + strlen(P3end)];
 	sprintf(buffer, "%s%s", argv[2], P3end);
-	int failed = P3colorpalette(argv[1], width, height, buffer);
+	int failed = P3colorpalette(argv[1], width, height, buffer);//passes in total vertical height???
 	if (failed)
 	{
 		printf("Error in making P3colorpalette");
