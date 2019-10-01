@@ -109,8 +109,8 @@ int main(int argc, char* argv[])
      	x_coord = floor(i/lw); //Corresponding 2D coordinate from 1D index.
      	y_coord = (double) (i % lw);
 		sprintf(ppmPATH, "%s/frame%05d.ppm", file, i);
-		ofp = fopen(ppmPATH, "+w");//Create new file.
-		fwrite(colormap[x_coord][y_coord],1,3,ofp);
+		ofp = fopen(ppmPATH, "w+");//Create new file.
+		fwrite(colormap[x_coord][y_coord],1,3,ofp);//write color to ppmPATH??? Idk what the fuck "iteration count" is
 	}
 
 	//STEP 4: Free all allocated memory
