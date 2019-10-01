@@ -17,10 +17,8 @@
 void printUsage(char* argv[])
 {
   printf("Usage: %s <threshold> <maxiterations> <center_real> <center_imaginary> <initialscale> <finalscale> <framecount> <resolution> <output_folder> <colorfile>\n", argv[0]);
-  printf("    This program simulates the Mandelbrot Fractal, and creates an iteration map of the given center, scale, and resolution, then saves it in output_file\n");
+  printf("This program simulates the Mandelbrot Fractal, and creates an iteration map of the given center, scale, and resolution, then saves it in output_file\n");
 }
-
-
 /*
 This function calculates the threshold values of every spot on a sequence of frames. The center stays the same throughout the zoom. First frame is at initialscale, and last frame is at finalscale scale.
 The remaining frames form a geometric sequence of scales, so 
@@ -28,7 +26,11 @@ if initialscale=1024, finalscale=1, framecount=11, then your frames will have sc
 As another example, if initialscale=10, finalscale=0.01, framecount=5, then your frames will have scale 10, 10 * (0.01/10)^(1/4), 10 * (0.01/10)^(2/4), 10 * (0.01/10)^(3/4), 0.01 .
 */
 void MandelMovie(double threshold, u_int64_t max_iterations, ComplexNumber* center, double initialscale, double finalscale, int framecount, u_int64_t resolution, u_int64_t ** output){
-    //YOUR CODE HERE
+    int multiplier;
+    for(int i = 0; i<framecount;i++){
+    	multiplier = finalscale/initialscale;
+    	Mandelbrot(threshold, max_iterations, center, finalscale * pow(multiplier, i/(frame_count-1)), resolution, output[i]); 
+    }
 }
 
 /**************
@@ -46,21 +48,53 @@ int main(int argc, char* argv[])
 	Check the spec for examples of invalid inputs.
 	Remember to use your solution to B.1.1 to process colorfile.
 	*/
+	if (argc != 11){
+		usage(argv);
+		return 1;
+	}
+	int* color_count = malloc(sizeof(int*));
+	double threshold = atof(argv[1]);
+	u_int64_t maxiterations = atoi(argv[2]);
+	double center_real = atof(argv[3]);
+	double center_imaginary = atof(argv[4]);
+	double initialscale = atof(argv[5]);
+	double finalscale = atof(argv[6]);
+	int framecount = atoi(argv[7]);
+	u_int64_t resolution = atoi(argv[8]);
+	char* file = argv[9];
 
-	//YOUR CODE HERE 
+	if(threshold <= 0 || maxiterations <= 0 ||  initialscale <= 0 || finalscale <= 0){
+		free(color_count);
+		return 1;
+	}
+	if(framecount <= 0 || framecount > 10000){
+		free(color_count);
+		return 1;
+	}
+	if(framecount==1 && initialscale!=finalscale){
+		free(color_count);
+		return 1;
+	}
 
-
-
-
+	FILE* ofp;//file pointer to OUTPUTFILE, which we write to.
+	uint8_t** colormap = FileToColorMap(argv[10], color_count); //Create colormap.
+	ComplexNumber* c_ptr = newComplexNumber(center_real, center_imaginary);	
+	char ppmPATH[strlen(file)+18];
+	
 	//STEP 2: Run MandelMovie on the correct arguments.
 	/*
 	MandelMovie requires an output array, so make sure you allocate the proper amount of space. 
 	If allocation fails, free all the space you have already allocated (including colormap), then return with exit code 1.
 	*/
-
-	//YOUR CODE HERE 
-
-
+	u_int64_t lw = 2 * resolution + 1; //length
+	u_int64_t** output = (u_int64_t**) malloc(pow(lw, 2)*sizeof(u_int64_t*));
+	if(output == NULL){
+		fclose(ofp);
+		free(colormap);
+		free(color_count);
+		return 1;
+	}
+	MandelMovie(threshold, maxiterations, c_ptr, initialscale, finalscale, framecount, resolution, output);
 
 	//STEP 3: Output the results of MandelMovie to .ppm files.
 	/*
@@ -70,20 +104,23 @@ int main(int argc, char* argv[])
 	As a reminder, we are using P6 format, not P3.
 	*/
 
-	//YOUR CODE HERE 
-
-
-
+	double x_coord, y_coord;
+	for(int i=0;i<framecount;i++){
+     	x_coord = floor(i/lw); //Corresponding 2D coordinate from 1D index.
+     	y_coord = (double) (i % lw);
+		sprintf(ppmPATH, "%s/frame%05d.ppm", file, i);
+		ofp = fopen(ppmPATH, "+w");//Create new file.
+		fwrite(colormap[x_coord][y_coord],1,3,ofp);
+	}
 
 	//STEP 4: Free all allocated memory
 	/*
 	Make sure there's no memory leak.
 	*/
-	//YOUR CODE HERE 
-
-
-
-
+	free(colormap);
+	free(color_count);
+	free(output);
+	fclose(ofp);
 
 	return 0;
 }
