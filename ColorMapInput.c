@@ -37,6 +37,7 @@ uint8_t** FileToColorMap(char* colorfile, int* colorcount)
 			num_lines = num_lines+1;
 		}
 	}
+	num_lines = num_lines+1; //one more for final line, which doesn't have a '\n'
 	printf("Number of lines: %d\n", num_lines);
 	printf("Checkpt1 \n");
 	num_colors = num_lines-1; //accomodates wrong NUMBER OF COLORS specified at beginning of colorfile.
