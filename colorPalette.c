@@ -23,6 +23,7 @@ int P3colorpalette(char* colorfile, int width, int heightpercolor, char* outputf
 	int* num_cls = NULL; //Number of colors
 	// char* color;  //Row of colors in string form.
 	uint8_t** color_arr = FileToColorMap(colorfile, num_cls);
+	printf("CHECKPT2");
 	FILE* fpi = fopen(colorfile, "r");
 	FILE* fpo = fopen(outputfile, "w");
 	if(fpi == NULL || width < 1 || heightpercolor < 1){
