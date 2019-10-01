@@ -19,7 +19,7 @@ void usage(char* argv[])
 //Creates a color palette image for the given colorfile in outputfile. Width and heightpercolor dictates the dimensions of each color. Output should be in P3 format
 int P3colorpalette(char* colorfile, int width, int heightpercolor, char* outputfile)
 {
-	int i,j,k,l;
+	int i,j,k;
 	int* num_cls = malloc(sizeof(int*)); //Number of colors
 	// char* color;  //Row of colors in string form.
 	uint8_t** color_arr = FileToColorMap(colorfile, num_cls);
@@ -45,13 +45,36 @@ int P3colorpalette(char* colorfile, int width, int heightpercolor, char* outputf
 			fprintf(fpo, "\n");
 		}
 	}
+	fclose(fpi);
+	fclose(fpo);
 	return 0;
 }
 
 //Same as above, but with P6 format
 int P6colorpalette(char* colorfile, int width, int heightpercolor, char* outputfile)
 {
-	//YOUR CODE HERE
+	int i,j,k;
+	int* num_cls = malloc(sizeof(int*)); //Number of colors
+	// char* color;  //Row of colors in string form.
+	uint8_t** color_arr = FileToColorMap(colorfile, num_cls);
+	FILE* fpi = fopen(colorfile, "r");
+	FILE* fpo = fopen(outputfile, "w");
+	if(fpi == NULL || width < 1 || heightpercolor < 1){
+		fclose(fpi); //same as freeing.
+		fclose(fpo);
+		return 1;
+	}
+	fprintf(fpo, "P6 %d %d %d\n", width, heightpercolor * *(num_cls), 255);//test header
+	printf("P6 %d %d %d\n", width, heightpercolor * *(num_cls), 255);//test header
+
+
+	for(i=0; i< *num_cls; i++){//PRINTS ALL COLORS.	
+		for(j=0;j<heightpercolor;j++){//PRINTS heightpercolor ROWS OF COLORS.
+			for(k=0; k<width;k++){//PRINT SINGLE COLOR, WIDTH TIMES.
+				fwrite(color_arr[i], 1, 3, fpo);
+			}
+		}
+	}
 	return 0;
 }
 

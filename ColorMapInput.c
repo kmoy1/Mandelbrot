@@ -39,7 +39,6 @@ uint8_t** FileToColorMap(char* colorfile, int* colorcount)
 	}
 	num_lines = num_lines+1; //one more for final line, which doesn't have a '\n'
 	printf("Number of lines: %d\n", num_lines);
-	printf("Checkpt1 \n");
 	num_colors = num_lines-1; //accomodates wrong NUMBER OF COLORS specified at beginning of colorfile.
 	fseek(cfp,0,SEEK_SET);//reset cfp to beginning of file.
 	fscanf(cfp, "%d", &N); //stores length of color array in N.
@@ -55,7 +54,7 @@ uint8_t** FileToColorMap(char* colorfile, int* colorcount)
 	for(int i=0; i<num_colors; i++){
 		c_arr[i] = (uint8_t *) malloc(3*sizeof(uint8_t)); //allocate space for each 3-int group also
 		fscanf(cfp, "%d %d %d", &c1, &c2, &c3);//read a line.
-		printf("Adding: [%d %d %d]\n", c1,c2,c3); //sanity check 2
+		// printf("Adding: [%d %d %d]\n", c1,c2,c3); //sanity check 2
 		c_arr[i][0]=c1;
 		c_arr[i][1]=c2;
 		c_arr[i][2]=c3;
