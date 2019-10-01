@@ -59,7 +59,7 @@ uint8_t** FileToColorMap(char* colorfile, int* colorcount)
 		c_arr[i][1]=c2;
 		c_arr[i][2]=c3;
 	}
-	printf("Checkpt2 \n");
 	fclose(cfp);
+	printf("Checkpt2 \n");
 	return c_arr;
 }
