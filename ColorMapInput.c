@@ -38,8 +38,10 @@ uint8_t** FileToColorMap(char* colorfile, int* colorcount)
 		}
 	}
 	printf("Number of lines: %d\n", num_lines);
+	printf("Checkpt1 \n");
 	num_colors = num_lines-1; //accomodates wrong NUMBER OF COLORS specified at beginning of colorfile.
 	fseek(cfp,0,SEEK_SET);//reset cfp to beginning of file.
+	printf("Checkpt2 \n");
 	fscanf(cfp, "%d", &N); //stores length of color array in N.
 	// for(num_colors=0;num_colors<N;num_colors++){//save TRUE number of colors to num_colors.
 	// 	fgets();
@@ -47,7 +49,6 @@ uint8_t** FileToColorMap(char* colorfile, int* colorcount)
 	// 		break;
 	// 	}
 	// }
-	printf("Checkpt");
 	*colorcount = num_colors;
 	printf("Array length N=%d\n", N); //sanity check (N != num_colorss necessarily)
 	uint8_t** c_arr = (uint8_t**) malloc(num_colors * sizeof(uint8_t**));//malloc a length-N 2D array for colors. 
