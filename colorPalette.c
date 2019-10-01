@@ -19,11 +19,11 @@ void usage(char* argv[])
 //Creates a color palette image for the given colorfile in outputfile. Width and heightpercolor dictates the dimensions of each color. Output should be in P3 format
 int P3colorpalette(char* colorfile, int width, int heightpercolor, char* outputfile)
 {
+	printf("CHECKPT2");
 	int i,j,k,l;
 	int* num_cls = NULL; //Number of colors
 	// char* color;  //Row of colors in string form.
 	uint8_t** color_arr = FileToColorMap(colorfile, num_cls);
-	printf("CHECKPT2");
 	FILE* fpi = fopen(colorfile, "r");
 	FILE* fpo = fopen(outputfile, "w");
 	if(fpi == NULL || width < 1 || heightpercolor < 1){
