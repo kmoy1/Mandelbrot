@@ -20,7 +20,7 @@ void usage(char* argv[])
 int P3colorpalette(char* colorfile, int width, int heightpercolor, char* outputfile)
 {
 	int i,j,k,l;
-	int* num_cls; //Number of colors
+	int* num_cls = NULL; //Number of colors
 	// char* color;  //Row of colors in string form.
 	uint8_t** color_arr = FileToColorMap(colorfile, num_cls);
 	FILE* fpi = fopen(colorfile, "r");
