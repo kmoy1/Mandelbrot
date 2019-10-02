@@ -125,7 +125,7 @@ int main(int argc, char* argv[])
 		ofp = fopen(ppmPATH, "w+");//Create new file.
 		iterationImage = output[i]; //Contains Iteration image. Need to turn this into colors in p6. 
 		for(int b=0;b<pow(lw,2);b++){
-			fwrite(colormap[output[i][b]], 1, 3, ofp); //SEGFAULT OCCURS ON INDEX 0????????????????????????????????? WHAT THE FUCK
+			fwrite(colormap[output[i][b]], 1, 3, ofp); 
 			printf("Inbounds at index %d\n", i);
 		}
 		fclose(ofp);
