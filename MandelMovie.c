@@ -31,8 +31,8 @@ void MandelMovie(double threshold, u_int64_t max_iterations, ComplexNumber* cent
     double multiplier;
     for(int i = 0; i<framecount;i++){
     	multiplier = finalscale/initialscale;
-    	printf("At index %d: Scale = %lf\n", i, initialscale * pow(multiplier, (double)i/(framecount-1)));
-    	Mandelbrot(threshold, max_iterations, center, initialscale * pow(multiplier, i/(framecount-1)), resolution, *(output+i)); 
+    	// printf("At index %d: Scale = %lf\n", i, initialscale * pow(multiplier, (double)i/(framecount-1)));
+    	Mandelbrot(threshold, max_iterations, center, initialscale * pow(multiplier, (double)i/(framecount-1)), resolution, *(output+i)); 
     }
 }
 
@@ -116,7 +116,7 @@ int main(int argc, char* argv[])
 	//output[i] contains a single iteration image (which is another int array) at index i
 	char* file = argv[9];
 	// double x_coord, y_coord;
-	u_int64_t* iterationImage = (u_int64_t*) malloc(sizeof(u_int64_t));
+	u_int64_t* iterationImage = (u_int64_t*) malloc(pow(lw,2)*sizeof(u_int64_t));
 	char* frameEnd = "/frame00000.ppm";
 	for(int i=0;i<framecount;i++){
      	// x_coord = floor(i/lw); //Corresponding 2D coordinate from 1D index. 
@@ -126,6 +126,7 @@ int main(int argc, char* argv[])
 		sprintf(ppmPATH, "%s/frame%05d.ppm", file, i);
 		ofp = fopen(ppmPATH, "w+");//Create new file.
 		iterationImage = output[i]; //Contains Iteration image. Need to turn this into colors in p6. 
+		printf("Successfully stored an iterationImage.\n");
 		for(int b=0;b<pow(lw,2);b++){
 			fwrite(colormap[output[i][b]], 1, 3, ofp); 
 			printf("Inbounds at index %d\n", i);
