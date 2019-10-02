@@ -55,7 +55,7 @@ int main(int argc, char* argv[])
 		printUsage(argv);
 		return 1;
 	}
-	int* color_count = malloc(sizeof(int*));
+	int* color_count = malloc(sizeof(int));
 	double threshold = atof(argv[1]);
 	u_int64_t maxiterations = atoi(argv[2]);
 	double center_real = atof(argv[3]);
@@ -79,6 +79,8 @@ int main(int argc, char* argv[])
 	}
 	FILE* ofp;//file pointer to OUTPUTFILE, which we write to.
 	uint8_t** colormap = FileToColorMap(argv[10], color_count); //Create colormap.
+	printf("Colorfile:%s\n", argv[10]);
+	printf("Colorcount:%d\n", *color_count);
 	ComplexNumber* c_ptr = newComplexNumber(center_real, center_imaginary);	
 	u_int64_t lw = 2 * resolution + 1; //length
 	printf("Colormap[0][0] = %d", colormap[0][0]);
@@ -123,7 +125,7 @@ int main(int argc, char* argv[])
 		ofp = fopen(ppmPATH, "w+");//Create new file.
 		iterationImage = output[i]; //Contains Iteration image. Need to turn this into colors in p6. 
 		for(int b=0;b<pow(lw,2);b++){
-			fwrite(colormap[output[i][b]], 1, 3, ofp); //SEGFAULT OCCURS ON INDEX 0
+			fwrite(colormap[output[i][b]], 1, 3, ofp); //SEGFAULT OCCURS ON INDEX 0????????????????????????????????? WHAT THE FUCK
 			printf("Inbounds at index %d\n", i);
 		}
 		fclose(ofp);
