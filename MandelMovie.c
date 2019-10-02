@@ -118,6 +118,12 @@ int main(int argc, char* argv[])
 	// double x_coord, y_coord;
 	u_int64_t* iterationImage = (u_int64_t*) malloc(pow(lw,2)*sizeof(u_int64_t));
 	char* frameEnd = "/frame00000.ppm";
+	iterationImage = output[i]; //Contains Iteration image. Need to turn this into colors in p6. 
+		// printf("Successfully stored an iterationImage.\n");
+	for(int iter=0;iter<pow(lw,2);iter++){
+		printf("iterationImage[%d])=%lu\n", iter, iterationImage[i]);
+	}
+	
 	for(int i=0;i<framecount;i++){
      	// x_coord = floor(i/lw); //Corresponding 2D coordinate from 1D index. 
      	// y_coord = (double) (i % lw);
@@ -125,8 +131,6 @@ int main(int argc, char* argv[])
      	printf("Adding file %s/frame%05d.ppm...\n", file, i);
 		sprintf(ppmPATH, "%s/frame%05d.ppm", file, i);
 		ofp = fopen(ppmPATH, "w+");//Create new file.
-		iterationImage = output[i]; //Contains Iteration image. Need to turn this into colors in p6. 
-		printf("Successfully stored an iterationImage.\n");
 		for(int b=0;b<pow(lw,2);b++){
 			fwrite(colormap[output[i][b]], 1, 3, ofp); 
 			printf("Inbounds at index %d\n", i);
