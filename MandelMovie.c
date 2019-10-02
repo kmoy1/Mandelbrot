@@ -120,9 +120,8 @@ int main(int argc, char* argv[])
 		sprintf(ppmPATH, "%s/frame%05d.ppm", file, i);
 		ofp = fopen(ppmPATH, "w+");//Create new file.
 		iterationImage = output[i]; //Contains Iteration image. Need to turn this into colors in p6. 
-		printf("Good on iter %d\n", i);
+		printf("Colormap[%d] = %d", i, colormap[i]);
 		for(int b=0;b<pow(lw,2);b++){
-			printf("img[%d] = %lu\n", b, output[i][b]);
 			fwrite(colormap[output[i][b]], 1, 3, ofp); //SEGFAULT OCCURS ON INDEX 0
 			printf("Inbounds at index %d\n", i);
 		}
