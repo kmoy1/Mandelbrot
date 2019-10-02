@@ -63,14 +63,31 @@ uint8_t** FileToColorMap(char* colorfile, int* colorcount)
 
 	*colorcount = N; //N passes the validity tests. WE'll have N colors.
 	uint8_t** c_arr = (uint8_t**) malloc(N * sizeof(uint8_t*));//malloc a length-N 2D array for colors. 
+	printf("Check: N=%d\n", N);
+	printf("NumColors = %d\n", num_colors);
+	for(int i=0;i<N;i++){
+		*(c_arr+i) = (uint8_t *) malloc(3*sizeof(uint8_t));
+	}
+	int checkColorScan;
 	for(int i=0; i<N; i++){
 		printf("Good on index %d\n", i);
-		c_arr[i] = (uint8_t *) malloc(3*sizeof(uint8_t)); //allocate space for each 3-int group also
-		fscanf(cfp, "%d %d %d", &c1, &c2, &c3);//read a line.
+		uint8_t* color = (uint8_t *) malloc(3*sizeof(uint8_t)); //A single color.
+		checkColorScan = fscanf(cfp, "%hhu %hhu %hhu", &(*(color)), &(*(color+1)), &(*(color+2)));//read a line.
+		
+		if(checkColorScan!=3){//Bad read of color => File format wrong OR too short.
+			free(color);
+			for(int a=0;a<i;a++){
+				free(*(c_arr+a));
+			}
+			free(c_arr);
+			fclose(cfp);
+			return NULL;
+		}
 		// printf("Adding: [%d %d %d]\n", c1,c2,c3); //sanity check 2
-		c_arr[i][0]=c1;
-		c_arr[i][1]=c2;
-		c_arr[i][2]=c3;
+		// c_arr[i][0]=c1;
+		// c_arr[i][1]=c2;
+		// c_arr[i][2]=c3;
+		*(c_arr+i) = color; //Add color array to array of colors.
 	}
 	fclose(cfp);
 	return c_arr;//we essentially return a 
