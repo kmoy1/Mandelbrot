@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <math.h>
+#include
 #include "ComplexNumber.h"
 #include "Mandelbrot.h"
 #include "ColorMapInput.h"
@@ -29,16 +30,16 @@ void MandelMovie(double threshold, u_int64_t max_iterations, ComplexNumber* cent
     int multiplier;
     for(int i = 0; i<framecount;i++){
     	multiplier = finalscale/initialscale;
-    	Mandelbrot(threshold, max_iterations, center, finalscale * pow(multiplier, i/(frame_count-1)), resolution, output[i]); 
+    	Mandelbrot(threshold, max_iterations, center, finalscale * pow(multiplier, i/(framecount-1)), resolution, output[i]); 
     }
 }
 
 /*This function converts a color, represented by an integer array, to a string in binary format.*/
 void convertToP6AndWrite(int* image, FILE* fp, int img_size, uint8_t** colormap){
-	int threshold; //index to access colormap. 
+	int th; //index to access colormap (threshold)
 	for(int i=0;i<img_size;i++){
-		threshold=image[i];
-		fwrite(colormap[threshold], 1, 3, fp); //write a threshold
+		th=image[i];
+		fwrite(colormap[th], 1, 3, fp); //write a threshold
 	}
 }
 
@@ -58,7 +59,8 @@ int main(int argc, char* argv[])
 	Remember to use your solution to B.1.1 to process colorfile.
 	*/
 	if (argc != 11){
-		usage(argv);
+		printf("WRONG NUMBER OF ARGS!\n")
+		printUsage(argv);
 		return 1;
 	}
 	int* color_count = malloc(sizeof(int*));
@@ -88,7 +90,8 @@ int main(int argc, char* argv[])
 	uint8_t** colormap = FileToColorMap(argv[10], color_count); //Create colormap.
 	int* color = (int*) malloc(3*sizeof(int));
 	ComplexNumber* c_ptr = newComplexNumber(center_real, center_imaginary);	
-	
+	u_int64_t lw = 2 * resolution + 1; //length
+
 	//STEP 2: Run MandelMovie on the correct arguments.
 	/*
 	MandelMovie requires an output array, so make sure you allocate the proper amount of space. 
@@ -117,7 +120,6 @@ int main(int argc, char* argv[])
 	double x_coord, y_coord;
 	int threshold;
 	int* iterationImage;
-	u_int64_t lw = 2 * resolution + 1; //length
 
 	for(int i=0;i<framecount;i++){
      	// x_coord = floor(i/lw); //Corresponding 2D coordinate from 1D index. 

@@ -54,6 +54,11 @@ uint8_t** FileToColorMap(char* colorfile, int* colorcount)
 		fclose(cfp);
 		return NULL;
 	}
+	if(N < 0){
+		printf("N cannot be negative.\n");
+		fclose(cfp);
+		return NULL;
+	}
 	*colorcount = N; //N passes the validity tests. WE'll have N colors.
 	uint8_t** c_arr = (uint8_t**) malloc(N * sizeof(uint8_t**));//malloc a length-N 2D array for colors. 
 	for(int i=0; i<num_colors; i++){
