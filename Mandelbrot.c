@@ -61,7 +61,6 @@ void Mandelbrot(double threshold, u_int64_t max_iterations, ComplexNumber* cente
 	 printf("IN MANDELBROT\n");
 	 ComplexNumber* pt = newComplexNumber(0.0,0.0);
      for(i=0;i<pow(lw,2);i++){ //Construct corresponding point C per index. A SQUARE LENGTH size x size array.
-     	printf("AT index %d\n", i);
      	x_coord = floor(i/lw); //Corresponding 2D coordinate from 1D index.
      	y_coord = (double) (i % lw);
      	dx = x_coord - center_x;//Displacement of point from center.
