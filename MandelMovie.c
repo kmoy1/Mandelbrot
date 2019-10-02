@@ -83,7 +83,7 @@ int main(int argc, char* argv[])
 		free(color_count);
 		return 1;
 	}
-
+	printf("Check1\n");
 	FILE* ofp;//file pointer to OUTPUTFILE, which we write to.
 	uint8_t** colormap = FileToColorMap(argv[10], color_count); //Create colormap.
 	int* color = (int*) malloc(3*sizeof(int));
@@ -95,6 +95,7 @@ int main(int argc, char* argv[])
 	MandelMovie requires an output array, so make sure you allocate the proper amount of space. 
 	If allocation fails, free all the space you have already allocated (including colormap), then return with exit code 1.
 	*/
+	printf("Check2\n");
 	u_int64_t** output = (u_int64_t**) malloc(pow(lw, 2)*sizeof(u_int64_t*));
 	if(output == NULL){
 		fclose(ofp);
