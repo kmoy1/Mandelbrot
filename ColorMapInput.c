@@ -28,7 +28,7 @@ uint8_t** FileToColorMap(char* colorfile, int* colorcount)
 	FILE* cfp = fopen(colorfile, "r");
 	if(cfp == NULL){//file doesn't exist/empty
 		printf("File Opening Error. Terminating.\n");
-		free(cfp);
+		fclose(cfp);
 		return NULL;
 	}
 
@@ -50,9 +50,9 @@ uint8_t** FileToColorMap(char* colorfile, int* colorcount)
 	// }
 	*colorcount = num_colors;
 	printf("Array length N=%d\n", N); //sanity check (N != num_colorss necessarily)
-	if(num_lines-1 > N){
+	if(num_lines-1 < N){
 		printf("Number of lines too big: Terminating.\n");
-		free(cfp);
+		fclose(cfp);
 		return NULL;
 	}
 	uint8_t** c_arr = (uint8_t**) malloc(num_colors * sizeof(uint8_t**));//malloc a length-N 2D array for colors. 
