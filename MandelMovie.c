@@ -129,7 +129,7 @@ int main(int argc, char* argv[])
      	printf("Adding file %s/frame%05d.ppm...\n", file, i);
 		sprintf(ppmPATH, "%s/frame%05d.ppm", file, i);
 		ofp = fopen(ppmPATH, "w+");//Create new file.
-		for(int b=0;b<pow(lw,2);b++){
+		for(int b=0;b<size;b++){
 			fwrite(colormap[output[i][b]], 1, 3, ofp); 
 			printf("Inbounds at index %d\n", i);
 		}
