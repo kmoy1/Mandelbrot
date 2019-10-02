@@ -61,7 +61,7 @@ int main(int argc, char* argv[])
 		printUsage(argv);
 		return 1;
 	}
-	int* color_count = malloc(sizeof(int));
+	int* color_count = malloc(sizeof(int*));
 	double threshold = atof(argv[1]);
 	u_int64_t maxiterations = atoi(argv[2]);
 	double center_real = atof(argv[3]);
@@ -83,7 +83,7 @@ int main(int argc, char* argv[])
 		free(color_count);
 		return 1;
 	}
-	// FILE* ofp;//file pointer to OUTPUTFILE, which we write to.
+	FILE* ofp;//file pointer to OUTPUTFILE, which we write to.
 	uint8_t** colormap = FileToColorMap(argv[10], color_count); //Create colormap.
 	ComplexNumber* c_ptr = newComplexNumber(center_real, center_imaginary);	
 	u_int64_t lw = 2 * resolution + 1; //length
@@ -99,7 +99,7 @@ int main(int argc, char* argv[])
 	}
 
 	if(output == NULL){
-		// fclose(ofp);
+		fclose(ofp);
 		free(colormap);
 		free(color_count);
 		return 1;
@@ -119,11 +119,11 @@ int main(int argc, char* argv[])
 	// double x_coord, y_coord;
 	int* iterationImage;
 	char* frameEnd = "/frame00000.ppm";
+	printf("%s/frame%05d.ppm", file, 234);
 	for(int i=0;i<framecount;i++){
      	// x_coord = floor(i/lw); //Corresponding 2D coordinate from 1D index. 
      	// y_coord = (double) (i % lw);
      	char ppmPATH[strlen(file)+strlen(frameEnd)]; //string for creating new file location.
-     	printf("%s/frame%05d.ppm", file, i);
 		// sprintf(ppmPATH, "%s/frame%05d.ppm", file, i);
 		// ofp = fopen(ppmPATH, "w+");//Create new file.
 		// iterationImage = output[i]; //Contains Iteration image. Need to turn this into colors in p6. 
@@ -137,7 +137,7 @@ int main(int argc, char* argv[])
 	free(colormap);
 	free(color_count);
 	free(output);
-	// fclose(ofp);
+	fclose(ofp);
 
 	return 0;
 }
