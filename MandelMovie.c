@@ -36,6 +36,9 @@ void MandelMovie(double threshold, u_int64_t max_iterations, ComplexNumber* cent
     }
 }
 
+void convertToColorAndWrite(u_int64_t* image, uint8_t** colormap, FILE* fp, u_int64_t sz){
+	
+}
 /**************
 **This main function converts command line inputs into the format needed to run MandelMovie.
 **It then uses the color array from FileToColorMap to create PPM images for each frame, and stores it in output_folder
@@ -116,8 +119,6 @@ int main(int argc, char* argv[])
 	// double x_coord, y_coord;
 	u_int64_t* iterationImage = (u_int64_t*) malloc(size*sizeof(u_int64_t));
 	char* frameEnd = "/frame00000.ppm";
-	iterationImage = output[1]; //Contains Iteration image. Need to turn this into colors in p6. 
-		// printf("Successfully stored an iterationImage.\n");
 	for(int iter=0;iter<size;iter++){
 		printf("iterationImage[%d]=%lu\n", iter, iterationImage[iter]);
 	}
@@ -129,10 +130,9 @@ int main(int argc, char* argv[])
      	printf("Adding file %s/frame%05d.ppm...\n", file, i);
 		sprintf(ppmPATH, "%s/frame%05d.ppm", file, i);
 		ofp = fopen(ppmPATH, "w+");//Create new file.
-		for(int b=0;b<size;b++){
-			fwrite(colormap[output[i][b]], 1, 3, ofp); 
-			printf("Inbounds at index %d\n", i);
-		}
+		iterationImage = output[i]; //Contains Iteration image. Need to turn this into colors in p6. 
+		convertToColorAndWrite(iterationImage, colormap, ofp, size); //Convert image to color and output.
+		free(iterationImage);
 		fclose(ofp);
 	}
 	//STEP 4: Free all allocated memory
