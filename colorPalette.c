@@ -25,7 +25,7 @@ int P3colorpalette(char* colorfile, int width, int heightpercolor, char* outputf
 	uint8_t** color_arr = FileToColorMap(colorfile, num_cls);
 	FILE* fpi = fopen(colorfile, "r");
 	FILE* fpo = fopen(outputfile, "w+");
-	if(fpi == NULL || width < 1 || heightpercolor < 1){
+	if(fpi == NULL || width < 1 || heightpercolor < 1 || color_arr == NULL){
 		fclose(fpi); //same as freeing.
 		fclose(fpo);
 		return 1;
@@ -63,7 +63,7 @@ int P6colorpalette(char* colorfile, int width, int heightpercolor, char* outputf
 	uint8_t** color_arr = FileToColorMap(colorfile, num_cls);
 	FILE* fpi = fopen(colorfile, "r");
 	FILE* fpo = fopen(outputfile, "w+");
-	if(fpi == NULL || width < 1 || heightpercolor < 1){
+	if(fpi == NULL || width < 1 || heightpercolor < 1 || color_arr == NULL){
 		fclose(fpi); //same as freeing.
 		fclose(fpo);
 		return 1;
