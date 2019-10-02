@@ -22,7 +22,6 @@ uint8_t** FileToColorMap(char* colorfile, int* colorcount)
 	int num_lines = 0;
 	char input[256];
 	char c;
-	char* i1;
 	uint8_t c1,c2,c3;//Color coords
 	uint8_t* carr; //holds c1,c2,c3 above in array.
 	FILE* cfp = fopen(colorfile, "r");
@@ -49,6 +48,7 @@ uint8_t** FileToColorMap(char* colorfile, int* colorcount)
 	// 	}
 	// }
 	printf("Array length N=%d\n", N); //sanity check (N != num_colorss necessarily)
+	printf("Number of colors given = %d\n", num_colors);
 	if(num_lines-1 < N){
 		printf("Number of lines too big: Terminating.\n");
 		fclose(cfp);
