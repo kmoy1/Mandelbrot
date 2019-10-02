@@ -81,7 +81,9 @@ int main(int argc, char* argv[])
 	uint8_t** colormap = FileToColorMap(argv[10], color_count); //Create colormap.
 	ComplexNumber* c_ptr = newComplexNumber(center_real, center_imaginary);	
 	u_int64_t lw = 2 * resolution + 1; //length
-
+	printf("Colormap[0][0] = %d", colormap[0][0]);
+	printf("Colormap[0][1] = %d", colormap[0][1]);
+	printf("Colormap[0][2] = %d", colormap[0][2]);
 	//STEP 2: Run MandelMovie on the correct arguments.
 	/*
 	MandelMovie requires an output array, so make sure you allocate the proper amount of space. 
@@ -120,7 +122,6 @@ int main(int argc, char* argv[])
 		sprintf(ppmPATH, "%s/frame%05d.ppm", file, i);
 		ofp = fopen(ppmPATH, "w+");//Create new file.
 		iterationImage = output[i]; //Contains Iteration image. Need to turn this into colors in p6. 
-		printf("Colormap[%d] = %d", i, colormap[i]);
 		for(int b=0;b<pow(lw,2);b++){
 			fwrite(colormap[output[i][b]], 1, 3, ofp); //SEGFAULT OCCURS ON INDEX 0
 			printf("Inbounds at index %d\n", i);
