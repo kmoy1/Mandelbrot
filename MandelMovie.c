@@ -121,7 +121,7 @@ int main(int argc, char* argv[])
 	iterationImage = output[1]; //Contains Iteration image. Need to turn this into colors in p6. 
 		// printf("Successfully stored an iterationImage.\n");
 	for(int iter=0;iter<pow(lw,2);iter++){
-		printf("iterationImage[%d])=%lu\n", iter, iterationImage[iter]);
+		printf("iterationImage[%d]=%lu\n", iter, iterationImage[iter]);
 	}
 
 	for(int i=0;i<framecount;i++){
