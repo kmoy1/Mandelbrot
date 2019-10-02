@@ -123,10 +123,9 @@ int main(int argc, char* argv[])
      	// x_coord = floor(i/lw); //Corresponding 2D coordinate from 1D index. 
      	// y_coord = (double) (i % lw);
      	char ppmPATH[strlen(file)+strlen(frameEnd)]; //string for creating new file location.
-     	printf("CHECK.\n");
 		sprintf(ppmPATH, "%s/frame%05d.ppm", file, i);
-		printf("Good on iter %d\n", i);
 		ofp = fopen(ppmPATH, "w+");//Create new file.
+		printf("Good on iter %d\n", i);
 		iterationImage = output[i]; //Contains Iteration image. Need to turn this into colors in p6. 
 		convertToP6AndWrite(iterationImage, ofp, pow(lw,2), colormap);//Convert interation image into colors and write into file pointed at by ofp. 
 		fclose(ofp);
