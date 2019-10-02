@@ -39,6 +39,7 @@ void convertToP6AndWrite(u_int64_t* image, FILE* fp, int img_size, uint8_t** col
 	printf("Entered convertP6 func successfully.\n");
 	for(int i=0;i<img_size;i++){
 		fwrite(colormap[image[i]], 1, 3, fp); //write a threshold
+		printf("Inbounds at index %d\n", i);
 	}
 }
 
@@ -127,7 +128,6 @@ int main(int argc, char* argv[])
      	printf("Adding file %s/frame%05d.ppm", file, i);
 		sprintf(ppmPATH, "%s/frame%05d.ppm", file, i);
 		ofp = fopen(ppmPATH, "w+");//Create new file.
-		printf("%d\n", sizeof(output[i])/sizeof(output[i][0]));
 		iterationImage = output[i]; //Contains Iteration image. Need to turn this into colors in p6. 
 		convertToP6AndWrite(iterationImage, ofp, pow(lw,2), colormap);//Convert interation image into colors and write into file pointed at by ofp. 
 		printf("Good on iter %d\n", i);
