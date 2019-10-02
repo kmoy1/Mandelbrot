@@ -50,6 +50,9 @@ int P3colorpalette(char* colorfile, int width, int heightpercolor, char* outputf
 	fclose(fpi);
 	fclose(fpo);
 	free(num_cls);
+	for(int a=0;a<num_cls;a++){
+		free(color_arr[a]);
+	}
 	free(color_arr);
 	return 0;
 }
@@ -79,6 +82,10 @@ int P6colorpalette(char* colorfile, int width, int heightpercolor, char* outputf
 			}
 		}
 	}
+	for(int a=0;a<num_cls;a++){
+		free(color_arr[a]);
+	}
+	free(color_arr);
 	fclose(fpi);
 	fclose(fpo);	
 	return 0;
