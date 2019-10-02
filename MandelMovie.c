@@ -126,7 +126,6 @@ int main(int argc, char* argv[])
 			// fwrite(colormap[image[i]], 1, 3, ofp); //SEGFAULT OCCURS ON INDEX 0
 			printf("Inbounds at index %d\n", i);
 		}
-	}
 		fclose(ofp);
 	}
 	//STEP 4: Free all allocated memory
