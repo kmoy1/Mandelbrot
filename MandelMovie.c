@@ -93,7 +93,6 @@ int main(int argc, char* argv[])
 	MandelMovie requires an output array, so make sure you allocate the proper amount of space. 
 	If allocation fails, free all the space you have already allocated (including colormap), then return with exit code 1.
 	*/
-	printf("Check1\n");
 	u_int64_t** output = (u_int64_t**) malloc(framecount*sizeof(u_int64_t**));
 	for(int a=0;a<pow(lw,2);a++){
 		output[a] = (uint8_t *) malloc(pow(lw,2)*sizeof(uint8_t));
@@ -106,7 +105,7 @@ int main(int argc, char* argv[])
 		return 1;
 	}
 	MandelMovie(threshold, maxiterations, c_ptr, initialscale, finalscale, framecount, resolution, output);
-	printf("Check2\n");
+	printf("Check1\n");
 	//STEP 3: Output the results of MandelMovie to .ppm files.
 	/*
 	Convert from iteration count to colors, and output the results into output files.
@@ -117,18 +116,20 @@ int main(int argc, char* argv[])
 
 	//output[i] contains a single iteration image (which is another int array) at index i
 	char* file = argv[9];
-	char ppmPATH[strlen(file)+18]; //string for creating new file location.
 	// double x_coord, y_coord;
 	int* iterationImage;
+	char* frameEnd = "/frame00000.ppm"
 	for(int i=0;i<framecount;i++){
      	// x_coord = floor(i/lw); //Corresponding 2D coordinate from 1D index. 
      	// y_coord = (double) (i % lw);
-		sprintf(ppmPATH, "%s/frame%05d.ppm", file, i);
+     	char ppmPATH[strlen(file)+strlen(frameEnd)]; //string for creating new file location.
+     	printf("%s/frame%05d.ppm", file, i);
+		// sprintf(ppmPATH, "%s/frame%05d.ppm", file, i);
 		ofp = fopen(ppmPATH, "w+");//Create new file.
 		iterationImage = output[i]; //Contains Iteration image. Need to turn this into colors in p6. 
 		convertToP6AndWrite(iterationImage, ofp, pow(lw,2), colormap);//Convert interation image into colors and write into file pointed at by ofp. 
 	}
-
+	printf("Check2");
 	//STEP 4: Free all allocated memory
 	/*
 	Make sure there's no memory leak.
