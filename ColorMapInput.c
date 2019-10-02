@@ -60,7 +60,7 @@ uint8_t** FileToColorMap(char* colorfile, int* colorcount)
 	}
 	*colorcount = N; //N passes the validity tests. WE'll have N colors.
 	uint8_t** c_arr = (uint8_t**) malloc(N * sizeof(uint8_t**));//malloc a length-N 2D array for colors. 
-	for(int i=0; i<num_colors; i++){
+	for(int i=0; i<N; i++){
 		c_arr[i] = (uint8_t *) malloc(3*sizeof(uint8_t)); //allocate space for each 3-int group also
 		fscanf(cfp, "%d %d %d", &c1, &c2, &c3);//read a line.
 		// printf("Adding: [%d %d %d]\n", c1,c2,c3); //sanity check 2
