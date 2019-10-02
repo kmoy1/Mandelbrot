@@ -94,7 +94,11 @@ int main(int argc, char* argv[])
 	If allocation fails, free all the space you have already allocated (including colormap), then return with exit code 1.
 	*/
 	printf("Check1\n");
-	u_int64_t** output = (u_int64_t**) malloc(pow(lw, 2)*sizeof(u_int64_t*));
+	u_int64_t** output = (u_int64_t**) malloc(framecount*sizeof(u_int64_t**));
+	for(int a=0;a<pow(lw,2);a++){
+		output[a] = (uint8_t *) malloc(pow(lw,2)*sizeof(uint8_t));
+	}
+
 	if(output == NULL){
 		fclose(ofp);
 		free(colormap);
