@@ -51,7 +51,7 @@ uint8_t** FileToColorMap(char* colorfile, int* colorcount)
 	*colorcount = num_colors;
 	printf("Array length N=%d\n", N); //sanity check (N != num_colorss necessarily)
 	if(num_lines-1 > N){
-		printf("Number of lines too big: Terminating.\n", N, num_lines);
+		printf("Number of lines too big: Terminating.\n");
 		free(cfp);
 		return NULL;
 	}
