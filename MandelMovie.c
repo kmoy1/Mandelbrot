@@ -126,8 +126,8 @@ int main(int argc, char* argv[])
 		sprintf(ppmPATH, "%s/frame%05d.ppm", file, i);
 		ofp = fopen(ppmPATH, "w+");//Create new file.
 		iterationImage = output[i]; //Contains Iteration image. Need to turn this into colors in p6. 
-		printf("Good on iter %d\n", i);
 		convertToP6AndWrite(iterationImage, ofp, pow(lw,2), colormap);//Convert interation image into colors and write into file pointed at by ofp. 
+		printf("Good on iter %d\n", i);
 		fclose(ofp);
 	}
 	//STEP 4: Free all allocated memory
