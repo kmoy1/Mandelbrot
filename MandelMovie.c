@@ -30,7 +30,7 @@ void MandelMovie(double threshold, u_int64_t max_iterations, ComplexNumber* cent
     int multiplier;
     for(int i = 0; i<framecount;i++){
     	multiplier = finalscale/initialscale;
-    	Mandelbrot(threshold, max_iterations, center, finalscale * pow(multiplier, i/(framecount-1)), resolution, output[i]); 
+    	Mandelbrot(threshold, max_iterations, center, finalscale * pow(multiplier, i/(framecount-1)), resolution, *(output+i)); 
     }
 }
 
@@ -106,6 +106,7 @@ int main(int argc, char* argv[])
 	Feel free to create your own helper function to complete this step.
 	As a reminder, we are using P6 format, not P3.
 	*/
+	for(int x)
 
 	//output[i] contains a single iteration image (which is another int array) at index i
 	char* file = argv[9];
