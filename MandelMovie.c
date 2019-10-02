@@ -33,6 +33,15 @@ void MandelMovie(double threshold, u_int64_t max_iterations, ComplexNumber* cent
     }
 }
 
+/*This function converts a color, represented by an integer array, to a string in binary format.*/
+void convertToP6AndWrite(int* image, FILE* fp, int img_size, uint8_t** colormap){
+	int threshold; //index to access colormap. 
+	for(int i=0;i<img_size;i++){
+		threshold=image[i];
+		fwrite(colormap[threshold], 1, 3, fp); //write a threshold
+	}
+}
+
 /**************
 **This main function converts command line inputs into the format needed to run MandelMovie.
 **It then uses the color array from FileToColorMap to create PPM images for each frame, and stores it in output_folder
@@ -61,7 +70,6 @@ int main(int argc, char* argv[])
 	double finalscale = atof(argv[6]);
 	int framecount = atoi(argv[7]);
 	u_int64_t resolution = atoi(argv[8]);
-	char* file = argv[9];
 
 	if(threshold <= 0 || maxiterations <= 0 ||  initialscale <= 0 || finalscale <= 0){
 		free(color_count);
@@ -78,15 +86,14 @@ int main(int argc, char* argv[])
 
 	FILE* ofp;//file pointer to OUTPUTFILE, which we write to.
 	uint8_t** colormap = FileToColorMap(argv[10], color_count); //Create colormap.
+	int* color = (int*) malloc(3*sizeof(int));
 	ComplexNumber* c_ptr = newComplexNumber(center_real, center_imaginary);	
-	char ppmPATH[strlen(file)+18];
 	
 	//STEP 2: Run MandelMovie on the correct arguments.
 	/*
 	MandelMovie requires an output array, so make sure you allocate the proper amount of space. 
 	If allocation fails, free all the space you have already allocated (including colormap), then return with exit code 1.
 	*/
-	u_int64_t lw = 2 * resolution + 1; //length
 	u_int64_t** output = (u_int64_t**) malloc(pow(lw, 2)*sizeof(u_int64_t*));
 	if(output == NULL){
 		fclose(ofp);
@@ -104,13 +111,21 @@ int main(int argc, char* argv[])
 	As a reminder, we are using P6 format, not P3.
 	*/
 
+	//output[i] contains a single iteration image (which is another int array) at index i
+	char* file = argv[9];
+	char ppmPATH[strlen(file)+18]; //string for creating new file location.
 	double x_coord, y_coord;
+	int threshold;
+	int* iterationImage;
+	u_int64_t lw = 2 * resolution + 1; //length
+
 	for(int i=0;i<framecount;i++){
-     	x_coord = floor(i/lw); //Corresponding 2D coordinate from 1D index.
-     	y_coord = (double) (i % lw);
+     	// x_coord = floor(i/lw); //Corresponding 2D coordinate from 1D index. 
+     	// y_coord = (double) (i % lw);
 		sprintf(ppmPATH, "%s/frame%05d.ppm", file, i);
 		ofp = fopen(ppmPATH, "w+");//Create new file.
-		fwrite(colormap[x_coord][y_coord],1,3,ofp);//write color to ppmPATH??? Idk what the fuck "iteration count" is
+		iterationImage = output[i]; //Contains Iteration image. Need to turn this into colors in p6. 
+		convertToP6AndWrite(iterationImage, ofp, pow(lw,2), colormap);//Convert interation image into colors and write into file pointed at by ofp. 
 	}
 
 	//STEP 4: Free all allocated memory

@@ -51,7 +51,9 @@ uint8_t** FileToColorMap(char* colorfile, int* colorcount)
 	*colorcount = num_colors;
 	printf("Array length N=%d\n", N); //sanity check (N != num_colorss necessarily)
 	if(N > num_lines-1){
-		printf("N: %d is larger than number of lines %d. Terminating\n", N, num_lines)
+		printf("N: %d is larger than number of lines %d. Terminating\n", N, num_lines);
+		free(cfp);
+		return NULL;
 	}
 	uint8_t** c_arr = (uint8_t**) malloc(num_colors * sizeof(uint8_t**));//malloc a length-N 2D array for colors. 
 	for(int i=0; i<num_colors; i++){
