@@ -38,7 +38,7 @@ void MandelMovie(double threshold, u_int64_t max_iterations, ComplexNumber* cent
 void convertToP6AndWrite(u_int64_t* image, FILE* fp, int img_size, uint8_t** colormap){
 	printf("Entered convertP6 func successfully.\n");
 	for(int i=0;i<img_size;i++){
-		printf("img[%d] = %d", i, image[i])
+		printf("img[%d] = %d", i, image[i]);
 		fwrite(colormap[image[i]], 1, 3, fp); //SEGFAULT OCCURS ON INDEX 0
 		printf("Inbounds at index %d\n", i);
 	}
