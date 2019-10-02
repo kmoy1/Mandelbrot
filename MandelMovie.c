@@ -31,7 +31,7 @@ void MandelMovie(double threshold, u_int64_t max_iterations, ComplexNumber* cent
     double multiplier;
     for(int i = 0; i<framecount;i++){
     	multiplier = finalscale/initialscale;
-    	printf("At index %d: Scale = %d\n", i, initialscale * pow(multiplier, i/(framecount-1)));
+    	printf("At index %d: Scale = %lf\n", i, initialscale * pow(multiplier, i/(framecount-1)));
     	Mandelbrot(threshold, max_iterations, center, initialscale * pow(multiplier, i/(framecount-1)), resolution, *(output+i)); 
     }
 }
@@ -84,9 +84,7 @@ int main(int argc, char* argv[])
 	printf("Colorcount:%d\n", *color_count);
 	ComplexNumber* c_ptr = newComplexNumber(center_real, center_imaginary);	
 	u_int64_t lw = 2 * resolution + 1; //length
-	printf("Colormap[0][0] = %d", colormap[0][0]);
-	printf("Colormap[0][1] = %d", colormap[0][1]);
-	printf("Colormap[0][2] = %d", colormap[0][2]);
+
 	//STEP 2: Run MandelMovie on the correct arguments.
 	/*
 	MandelMovie requires an output array, so make sure you allocate the proper amount of space. 
