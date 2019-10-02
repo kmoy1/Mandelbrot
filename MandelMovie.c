@@ -99,7 +99,7 @@ int main(int argc, char* argv[])
 	}
 
 	if(output == NULL){
-		fclose(ofp);
+		// fclose(ofp);
 		free(colormap);
 		free(color_count);
 		return 1;
