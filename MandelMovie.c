@@ -35,7 +35,8 @@ void MandelMovie(double threshold, u_int64_t max_iterations, ComplexNumber* cent
 }
 
 /*This function converts a color, represented by an integer array, to a string in binary format.*/
-void convertToP6AndWrite(int* image, FILE* fp, int img_size, uint8_t** colormap){
+void convertToP6AndWrite(u_int64_t* image, FILE* fp, int img_size, uint8_t** colormap){
+	printf("Entered convertP6 func successfully.\n");
 	for(int i=0;i<img_size;i++){
 		fwrite(colormap[image[i]], 1, 3, fp); //write a threshold
 	}
@@ -123,8 +124,10 @@ int main(int argc, char* argv[])
      	// x_coord = floor(i/lw); //Corresponding 2D coordinate from 1D index. 
      	// y_coord = (double) (i % lw);
      	char ppmPATH[strlen(file)+strlen(frameEnd)]; //string for creating new file location.
+     	printf("Adding file %s/frame%05d.ppm", file, i);
 		sprintf(ppmPATH, "%s/frame%05d.ppm", file, i);
 		ofp = fopen(ppmPATH, "w+");//Create new file.
+		printf("%d\n", sizeof(output[i])/sizeof(output[i][0]));
 		iterationImage = output[i]; //Contains Iteration image. Need to turn this into colors in p6. 
 		convertToP6AndWrite(iterationImage, ofp, pow(lw,2), colormap);//Convert interation image into colors and write into file pointed at by ofp. 
 		printf("Good on iter %d\n", i);
