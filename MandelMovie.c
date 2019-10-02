@@ -31,7 +31,7 @@ void MandelMovie(double threshold, u_int64_t max_iterations, ComplexNumber* cent
     double multiplier;
     for(int i = 0; i<framecount;i++){
     	multiplier = finalscale/initialscale;
-    	printf("At index %d: Scale = %lf\n", i, initialscale * pow(multiplier, i/(framecount-1)));
+    	printf("At index %d: Scale = %lf\n", i, initialscale * pow(multiplier, (double)i/(framecount-1)));
     	Mandelbrot(threshold, max_iterations, center, initialscale * pow(multiplier, i/(framecount-1)), resolution, *(output+i)); 
     }
 }
