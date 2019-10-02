@@ -95,7 +95,7 @@ int main(int argc, char* argv[])
 	*/
 	u_int64_t** output = (u_int64_t**) malloc(framecount*sizeof(u_int64_t**));
 	for(int a=0;a<pow(lw,2);a++){
-		output[a] = (uint8_t *) malloc(pow(lw,2)*sizeof(uint8_t));
+		output[a] = (u_int64_t *) malloc(pow(lw,2)*sizeof(u_int64_t));
 	}
 
 	if(output == NULL){
@@ -118,16 +118,16 @@ int main(int argc, char* argv[])
 	char* file = argv[9];
 	// double x_coord, y_coord;
 	int* iterationImage;
-	char* frameEnd = "/frame00000.ppm"
+	char* frameEnd = "/frame00000.ppm";
 	for(int i=0;i<framecount;i++){
      	// x_coord = floor(i/lw); //Corresponding 2D coordinate from 1D index. 
      	// y_coord = (double) (i % lw);
      	char ppmPATH[strlen(file)+strlen(frameEnd)]; //string for creating new file location.
      	printf("%s/frame%05d.ppm", file, i);
 		// sprintf(ppmPATH, "%s/frame%05d.ppm", file, i);
-		ofp = fopen(ppmPATH, "w+");//Create new file.
-		iterationImage = output[i]; //Contains Iteration image. Need to turn this into colors in p6. 
-		convertToP6AndWrite(iterationImage, ofp, pow(lw,2), colormap);//Convert interation image into colors and write into file pointed at by ofp. 
+		// ofp = fopen(ppmPATH, "w+");//Create new file.
+		// iterationImage = output[i]; //Contains Iteration image. Need to turn this into colors in p6. 
+		// convertToP6AndWrite(iterationImage, ofp, pow(lw,2), colormap);//Convert interation image into colors and write into file pointed at by ofp. 
 	}
 	printf("Check2");
 	//STEP 4: Free all allocated memory
