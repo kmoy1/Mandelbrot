@@ -93,7 +93,7 @@ int main(int argc, char* argv[])
 	MandelMovie requires an output array, so make sure you allocate the proper amount of space. 
 	If allocation fails, free all the space you have already allocated (including colormap), then return with exit code 1.
 	*/
-	u_int64_t** output = (u_int64_t**) malloc(framecount*sizeof(u_int64_t**));
+	u_int64_t** output = (u_int64_t**) malloc(framecount*sizeof(u_int64_t*));
 	for(int a=0;a<pow(lw,2);a++){
 		output[a] = (u_int64_t *) malloc(pow(lw,2)*sizeof(u_int64_t));
 	}
@@ -125,11 +125,11 @@ int main(int argc, char* argv[])
      	char ppmPATH[strlen(file)+strlen(frameEnd)]; //string for creating new file location.
 		sprintf(ppmPATH, "%s/frame%05d.ppm", file, i);
 		ofp = fopen(ppmPATH, "w+");//Create new file.
+		printf("Good on iter %d", i);
 		iterationImage = output[i]; //Contains Iteration image. Need to turn this into colors in p6. 
 		convertToP6AndWrite(iterationImage, ofp, pow(lw,2), colormap);//Convert interation image into colors and write into file pointed at by ofp. 
 		fclose(ofp);
 	}
-	printf("Check2");
 	//STEP 4: Free all allocated memory
 	/*
 	Make sure there's no memory leak.
