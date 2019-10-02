@@ -27,7 +27,7 @@ uint64_t MandelbrotIterations(u_int64_t maxiters, ComplexNumber * point, double 
 		z = ComplexSum(prod, point);
 		numIters = numIters + 1;
 		printf("%f + %fi\n", Re(z), Im(z));
-		printf("|Z| = %f\n"); 
+		printf("|Z| = %f\n", ComplexAbs(z)); 
 		if(ComplexAbs(z)>=threshold){
 			freeComplexNumber(z);
 			freeComplexNumber(prod);
