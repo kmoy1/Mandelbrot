@@ -27,11 +27,12 @@ if initialscale=1024, finalscale=1, framecount=11, then your frames will have sc
 As another example, if initialscale=10, finalscale=0.01, framecount=5, then your frames will have scale 10, 10 * (0.01/10)^(1/4), 10 * (0.01/10)^(2/4), 10 * (0.01/10)^(3/4), 0.01 .
 */
 void MandelMovie(double threshold, u_int64_t max_iterations, ComplexNumber* center, double initialscale, double finalscale, int framecount, u_int64_t resolution, u_int64_t ** output){
+	printf("Here in MandelMovie.\n"); 
     double multiplier;
     for(int i = 0; i<framecount;i++){
     	multiplier = finalscale/initialscale;
-    	printf("Here in MandelMovie.\n");
-    	Mandelbrot(threshold, max_iterations, center, finalscale * pow(multiplier, i/(framecount-1)), resolution, *(output+i)); 
+    	printf("At index %d: Scale = %d\n", i, initialscale * pow(multiplier, i/(framecount-1)));
+    	Mandelbrot(threshold, max_iterations, center, initialscale * pow(multiplier, i/(framecount-1)), resolution, *(output+i)); 
     }
 }
 
@@ -91,9 +92,11 @@ int main(int argc, char* argv[])
 	MandelMovie requires an output array, so make sure you allocate the proper amount of space. 
 	If allocation fails, free all the space you have already allocated (including colormap), then return with exit code 1.
 	*/
+
+	//Allocate a framecountx ((2*resolution+1)^2) 2D array.
 	u_int64_t** output = (u_int64_t**) malloc(framecount*sizeof(u_int64_t*));
 	for(int a=0;a<pow(lw,2);a++){
-		output[a] = (u_int64_t *) malloc(pow(lw,2)*sizeof(u_int64_t));
+		*(output+a) = (u_int64_t *) malloc(pow(lw,2)*sizeof(u_int64_t));
 	}
 
 	if(output == NULL){
@@ -102,6 +105,7 @@ int main(int argc, char* argv[])
 		free(color_count);
 		return 1;
 	}
+
 	MandelMovie(threshold, maxiterations, c_ptr, initialscale, finalscale, framecount, resolution, output);
 	printf("Check1\n");
 	//STEP 3: Output the results of MandelMovie to .ppm files.
