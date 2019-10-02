@@ -34,16 +34,6 @@ void MandelMovie(double threshold, u_int64_t max_iterations, ComplexNumber* cent
     }
 }
 
-/*This function converts a color, represented by an integer array, to a string in binary format.*/
-void convertToP6AndWrite(u_int64_t* image, FILE* fp, int img_size, uint8_t** colormap){
-	printf("Entered convertP6 func successfully.\n");
-	for(int i=0;i<img_size;i++){
-		printf("img[%d] = %d", i, *image[i]);
-		fwrite(colormap[image[i]], 1, 3, fp); //SEGFAULT OCCURS ON INDEX 0
-		printf("Inbounds at index %d\n", i);
-	}
-}
-
 /**************
 **This main function converts command line inputs into the format needed to run MandelMovie.
 **It then uses the color array from FileToColorMap to create PPM images for each frame, and stores it in output_folder
@@ -130,8 +120,13 @@ int main(int argc, char* argv[])
 		sprintf(ppmPATH, "%s/frame%05d.ppm", file, i);
 		ofp = fopen(ppmPATH, "w+");//Create new file.
 		iterationImage = output[i]; //Contains Iteration image. Need to turn this into colors in p6. 
-		convertToP6AndWrite(iterationImage, ofp, pow(lw,2)+1, colormap);//Convert interation image into colors and write into file pointed at by ofp. 
 		printf("Good on iter %d\n", i);
+		for(int b=0;b<pow(lw,2);b++){
+			printf("img[%d] = %d\n", i, iterationImage[i]);
+			// fwrite(colormap[image[i]], 1, 3, ofp); //SEGFAULT OCCURS ON INDEX 0
+			printf("Inbounds at index %d\n", i);
+		}
+	}
 		fclose(ofp);
 	}
 	//STEP 4: Free all allocated memory
