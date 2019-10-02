@@ -118,7 +118,7 @@ int main(int argc, char* argv[])
 	// double x_coord, y_coord;
 	u_int64_t* iterationImage = (u_int64_t*) malloc(pow(lw,2)*sizeof(u_int64_t));
 	char* frameEnd = "/frame00000.ppm";
-	iterationImage = output[0]; //Contains Iteration image. Need to turn this into colors in p6. 
+	iterationImage = output[1]; //Contains Iteration image. Need to turn this into colors in p6. 
 		// printf("Successfully stored an iterationImage.\n");
 	for(int iter=0;iter<pow(lw,2);iter++){
 		printf("iterationImage[%d])=%lu\n", iter, iterationImage[iter]);
