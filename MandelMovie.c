@@ -128,7 +128,8 @@ int main(int argc, char* argv[])
 		printf("Adding file %s\n", ppmPATH);
 		ofp = fopen(ppmPATH, "w+");//Create new file.
 		if(ofp==NULL){
-			printf("fopen failed, errno = %d\n", errno);
+			printf("fopen failed\n");
+			return 1;
 		}
 		free(iterationImage);
 		iterationImage = output[i]; //Contains Iteration image. Need to turn this into colors in p6. 
