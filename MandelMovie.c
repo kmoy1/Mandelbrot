@@ -131,7 +131,7 @@ int main(int argc, char* argv[])
 		iterationImage = output[i]; //Contains Iteration image. Need to turn this into colors in p6. 
 		printf("Check2\n");
 		// convertToColorAndWrite(iterationImage, colormap, ofp, size); //Convert image to color and output.
-		fclose(ofp);
+		// fclose(ofp);
 		printf("To iteration %d\n", i+1);
 	}
 	//STEP 4: Free all allocated memory
