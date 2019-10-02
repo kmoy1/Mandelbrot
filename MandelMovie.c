@@ -106,8 +106,6 @@ int main(int argc, char* argv[])
 	Feel free to create your own helper function to complete this step.
 	As a reminder, we are using P6 format, not P3.
 	*/
-	for(int x)
-
 	//output[i] contains a single iteration image (which is another int array) at index i
 	char* file = argv[9];
 	// double x_coord, y_coord;
