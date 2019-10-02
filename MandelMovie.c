@@ -119,15 +119,15 @@ int main(int argc, char* argv[])
 	// double x_coord, y_coord;
 	int* iterationImage;
 	char* frameEnd = "/frame00000.ppm";
-	printf("%s/frame%05d.ppm", file, 234);
 	for(int i=0;i<framecount;i++){
      	// x_coord = floor(i/lw); //Corresponding 2D coordinate from 1D index. 
      	// y_coord = (double) (i % lw);
      	char ppmPATH[strlen(file)+strlen(frameEnd)]; //string for creating new file location.
-		// sprintf(ppmPATH, "%s/frame%05d.ppm", file, i);
-		// ofp = fopen(ppmPATH, "w+");//Create new file.
-		// iterationImage = output[i]; //Contains Iteration image. Need to turn this into colors in p6. 
-		// convertToP6AndWrite(iterationImage, ofp, pow(lw,2), colormap);//Convert interation image into colors and write into file pointed at by ofp. 
+		sprintf(ppmPATH, "%s/frame%05d.ppm", file, i);
+		ofp = fopen(ppmPATH, "w+");//Create new file.
+		iterationImage = output[i]; //Contains Iteration image. Need to turn this into colors in p6. 
+		convertToP6AndWrite(iterationImage, ofp, pow(lw,2), colormap);//Convert interation image into colors and write into file pointed at by ofp. 
+		fclose(ofp);
 	}
 	printf("Check2");
 	//STEP 4: Free all allocated memory
@@ -137,7 +137,6 @@ int main(int argc, char* argv[])
 	free(colormap);
 	free(color_count);
 	free(output);
-	fclose(ofp);
 
 	return 0;
 }
