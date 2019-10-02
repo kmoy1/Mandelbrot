@@ -118,7 +118,7 @@ int main(int argc, char* argv[])
 	char* frameEnd = "/frame00000.ppm";
 	iterationImage = output[1]; //Contains Iteration image. Need to turn this into colors in p6. 
 		// printf("Successfully stored an iterationImage.\n");
-	for(int iter=0;iter<pow(lw,2);iter++){
+	for(int iter=0;iter<size;iter++){
 		printf("iterationImage[%d]=%lu\n", iter, iterationImage[iter]);
 	}
 

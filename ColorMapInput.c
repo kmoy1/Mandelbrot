@@ -62,9 +62,9 @@ uint8_t** FileToColorMap(char* colorfile, int* colorcount)
 	uint8_t** c_arr = (uint8_t**) malloc(N * sizeof(uint8_t*));//malloc a length-N 2D array for colors. 
 	// printf("Check: N=%d\n", N);
 	// printf("NumColors = %d\n", num_colors);
-	for(int i=0;i<N;i++){
-		*(c_arr+i) = (uint8_t *) malloc(3*sizeof(uint8_t));
-	}
+	// for(int i=0;i<N;i++){
+	// 	*(c_arr+i) = (uint8_t *) malloc(3*sizeof(uint8_t));
+	// }
 
 	//Assign N colors to c_arr in order, thus creating the MAP.
 	int check;
