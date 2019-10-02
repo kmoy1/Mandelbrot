@@ -80,10 +80,8 @@ int main(int argc, char* argv[])
 	}
 	FILE* ofp;//file pointer to OUTPUTFILE, which we write to.
 	uint8_t** colormap = FileToColorMap(argv[10], color_count); //Create colormap.
-	printf("Colorfile:%s\n", argv[10]);
-	printf("Colorcount:%d\n", *color_count);
-	ComplexNumber* c_ptr = newComplexNumber(center_real, center_imaginary);	
-	u_int64_t lw = 2 * resolution + 1; //length
+	ComplexNumber* c_ptr = newComplexNumber(center_real, center_imaginary);	//Create our center.
+	u_int64_t size = pow(2 * resolution + 1, 2); //length
 
 	//STEP 2: Run MandelMovie on the correct arguments.
 	/*
@@ -93,8 +91,8 @@ int main(int argc, char* argv[])
 
 	//Allocate a framecountx ((2*resolution+1)^2) 2D array.
 	u_int64_t** output = (u_int64_t**) malloc(framecount*sizeof(u_int64_t*));
-	for(int a=0;a<pow(lw,2);a++){
-		*(output+a) = (u_int64_t *) malloc(pow(lw,2)*sizeof(u_int64_t));
+	for(int a=0;a<size;a++){
+		*(output+a) = (u_int64_t *) malloc(size*sizeof(u_int64_t));
 	}
 
 	if(output == NULL){
@@ -116,7 +114,7 @@ int main(int argc, char* argv[])
 	//output[i] contains a single iteration image (which is another int array) at index i
 	char* file = argv[9];
 	// double x_coord, y_coord;
-	u_int64_t* iterationImage = (u_int64_t*) malloc(pow(lw,2)*sizeof(u_int64_t));
+	u_int64_t* iterationImage = (u_int64_t*) malloc(size*sizeof(u_int64_t));
 	char* frameEnd = "/frame00000.ppm";
 	iterationImage = output[1]; //Contains Iteration image. Need to turn this into colors in p6. 
 		// printf("Successfully stored an iterationImage.\n");
