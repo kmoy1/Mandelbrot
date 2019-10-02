@@ -122,7 +122,7 @@ int main(int argc, char* argv[])
 		iterationImage = output[i]; //Contains Iteration image. Need to turn this into colors in p6. 
 		printf("Good on iter %d\n", i);
 		for(int b=0;b<pow(lw,2);b++){
-			printf("img[%d] = %d\n", b, iterationImage[b]);
+			printf("img[%d] = %lu\n", b, iterationImage[b]);
 			// fwrite(colormap[image[i]], 1, 3, ofp); //SEGFAULT OCCURS ON INDEX 0
 			printf("Inbounds at index %d\n", i);
 		}
