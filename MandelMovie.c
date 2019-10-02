@@ -30,6 +30,7 @@ void MandelMovie(double threshold, u_int64_t max_iterations, ComplexNumber* cent
     double multiplier;
     for(int i = 0; i<framecount;i++){
     	multiplier = finalscale/initialscale;
+    	printf("Here in MandelMovie.\n");
     	Mandelbrot(threshold, max_iterations, center, finalscale * pow(multiplier, i/(framecount-1)), resolution, *(output+i)); 
     }
 }
@@ -121,7 +122,8 @@ int main(int argc, char* argv[])
 		iterationImage = output[i]; //Contains Iteration image. Need to turn this into colors in p6. 
 		printf("Good on iter %d\n", i);
 		for(int b=0;b<pow(lw,2);b++){
-			fwrite(colormap[output[i][b]], 1, 3, ofp); //SEGFAULT OCCURS ON INDEX 0
+			printf("img[%d] = %lu\n", b, output[i][b]);
+			// fwrite(colormap[image[i]], 1, 3, ofp); //SEGFAULT OCCURS ON INDEX 0
 			printf("Inbounds at index %d\n", i);
 		}
 		fclose(ofp);
