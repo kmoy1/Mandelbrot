@@ -36,8 +36,21 @@ void MandelMovie(double threshold, u_int64_t max_iterations, ComplexNumber* cent
     }
 }
 
-void convertToColorAndWrite(u_int64_t* image, uint8_t** colormap, FILE* fp, u_int64_t sz){
-	return;
+
+/*For sz iterations in the image, with each image converted to a color, which is then written to fp*/
+void convertToColorAndWrite(u_int64_t* image, uint8_t** colormap, FILE* fp, u_int64_t sz, int num_colors){
+	u_int64_t pixel;
+	for(int i=0;i<sz;i++){
+		if(*(image+i)>num_colors){
+			pixel = *(image+i) % num_colors;
+			fwrite(colormap[pixel],1,3,fp);
+
+		}
+		else{
+			pixel = *(image+i);
+			fwrite(colormap[pixel],1,3,fp);
+		}
+	}
 }
 /**************
 **This main function converts command line inputs into the format needed to run MandelMovie.
@@ -134,7 +147,7 @@ int main(int argc, char* argv[])
 		free(iterationImage);
 		iterationImage = output[i]; //Contains Iteration image. Need to turn this into colors in p6. 
 		printf("Check2\n");
-		convertToColorAndWrite(iterationImage, colormap, ofp, size); //Convert image to color and output.
+		convertToColorAndWrite(iterationImage, colormap, ofp, size, *color_count); //Convert image to color and output.
 		fclose(ofp);
 		printf("To iteration %d\n", i+1);
 	}
