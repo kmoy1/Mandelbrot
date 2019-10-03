@@ -41,7 +41,7 @@ void MandelMovie(double threshold, u_int64_t max_iterations, ComplexNumber* cent
 void convertToColorAndWrite(u_int64_t* image, uint8_t** colormap, FILE* fp, u_int64_t sz, int num_colors){
 	u_int64_t pixel;
 	int sqr_dims = sqrt((double)(sz));
-	printf("P6 %d %d %d\n", sqr_dims, sqr_dims, 255);//print header.
+	fprintf(fp, "P6 %d %d %d\n", sqr_dims, sqr_dims, 255);//print header.
 
 	for(int i=0;i<sz;i++){
 		if(*(image+i)>num_colors){
