@@ -43,9 +43,12 @@ void convertToColorAndWrite(u_int64_t* image, uint8_t** colormap, FILE* fp, u_in
 	u_int64_t pixel;
 	int sqr_dims = sqrt((double)(sz));
 	int zeros[3] = {0,0,0};
+	printf("SIZE SZ: %lu\n", sz);
+
 	fprintf(fp, "P6 %d %d %d\n", sqr_dims, sqr_dims, 255);//print header.
 	for(int i=0;i<sz;i++){
 		pixel = *(image+i);
+		printf("Pixel:  %lu\n", pixel);
 		if(pixel == 0){
 			fwrite(zeros,1,3,fp);
 		}
