@@ -60,7 +60,7 @@ int P3colorpalette(char* colorfile, int width, int heightpercolor, char* outputf
 int P6colorpalette(char* colorfile, int width, int heightpercolor, char* outputfile)
 {
 	int i,j,k;
-	int* num_cls = malloc(sizeof(int*)); //Number of colors
+	int* num_cls = malloc(sizeof(int)); //Number of colors
 	// char* color;  //Row of colors in string form.
 	uint8_t** color_arr = FileToColorMap(colorfile, num_cls);
 	FILE* fpi = fopen(colorfile, "r");
@@ -68,6 +68,8 @@ int P6colorpalette(char* colorfile, int width, int heightpercolor, char* outputf
 	if(fpi == NULL || width < 1 || heightpercolor < 1 || color_arr == NULL){
 		fclose(fpi); //same as freeing.
 		fclose(fpo);
+		free(color_arr);
+		free(num_cls);
 		return 1;
 	}
 	fprintf(fpo, "P6 %d %d %d\n", width, heightpercolor * *(num_cls), 255);//test header
@@ -85,6 +87,7 @@ int P6colorpalette(char* colorfile, int width, int heightpercolor, char* outputf
 		free(color_arr[a]);
 	}
 	free(color_arr);
+	free(num_cls);
 	fclose(fpi);
 	fclose(fpo);	
 	return 0;
