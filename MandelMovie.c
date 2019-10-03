@@ -27,7 +27,6 @@ if initialscale=1024, finalscale=1, framecount=11, then your frames will have sc
 As another example, if initialscale=10, finalscale=0.01, framecount=5, then your frames will have scale 10, 10 * (0.01/10)^(1/4), 10 * (0.01/10)^(2/4), 10 * (0.01/10)^(3/4), 0.01 .
 */
 void MandelMovie(double threshold, u_int64_t max_iterations, ComplexNumber* center, double initialscale, double finalscale, int framecount, u_int64_t resolution, u_int64_t ** output){
-	printf("Here in MandelMovie.\n"); 
     double multiplier;
     for(int i = 0; i<framecount;i++){
     	multiplier = finalscale/initialscale;
@@ -39,12 +38,9 @@ void MandelMovie(double threshold, u_int64_t max_iterations, ComplexNumber* cent
 
 /*For sz iterations in the image, with each image converted to a color, which is then written to fp*/
 void convertToColorAndWrite(u_int64_t* image, uint8_t** colormap, FILE* fp, u_int64_t sz, int num_colors){
-	printf("WE IN CONVERSION.\n");
 	u_int64_t pixel;
 	int sqr_dims = sqrt((double)(sz));
 	int zeros[3] = {0,0,0};
-	printf("SIZE SZ: %lu\n", sz);
-	printf("NUM_COLORS: %d\n", num_colors);
 	fprintf(fp, "P6 %d %d %d\n", sqr_dims, sqr_dims, 255);//print header.
 	for(int i=0;i<sz;i++){
 		pixel = *(image+i);
@@ -155,7 +151,7 @@ int main(int argc, char* argv[])
      	// y_coord = (double) (i % lw);
      	char ppmPATH[strlen(file)+strlen(frameEnd)]; //string for creating new file location.
 		sprintf(ppmPATH, "%s/frame%05d.ppm", file, i);
-		printf("Adding file %s\n", ppmPATH);
+		// printf("Adding file %s\n", ppmPATH);
 		ofp = fopen(ppmPATH, "w");//Create new file.
 		if(ofp==NULL){
 			printf("fopen failed\n");
@@ -166,10 +162,8 @@ int main(int argc, char* argv[])
 		}
 		free(iterationImage);
 		iterationImage = output[i]; //Contains Iteration image. Need to turn this into colors in p6. 
-		printf("Check2\n");
 		convertToColorAndWrite(iterationImage, colormap, ofp, size, *color_count); //Convert image to color and output.
 		fclose(ofp);
-		printf("To iteration %d\n", i+1);
 	}
 	//STEP 4: Free all allocated memory
 	/*
@@ -179,7 +173,7 @@ int main(int argc, char* argv[])
 	for(int s=0;s<*color_count;s++){
 		free(colormap[s]);
 	}
-	
+
 	free(colormap);
 	free(color_count);
 	free(output);
