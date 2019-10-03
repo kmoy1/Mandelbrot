@@ -20,7 +20,7 @@ void usage(char* argv[])
 int P3colorpalette(char* colorfile, int width, int heightpercolor, char* outputfile)
 {
 	int i,j,k;
-	int* num_cls = malloc(sizeof(int*)); //Number of colors
+	int* num_cls = malloc(sizeof(int)); //Number of colors
 	// char* color;  //Row of colors in string form.
 	uint8_t** color_arr = FileToColorMap(colorfile, num_cls);
 	FILE* fpi = fopen(colorfile, "r");
@@ -48,11 +48,11 @@ int P3colorpalette(char* colorfile, int width, int heightpercolor, char* outputf
 	}
 	fclose(fpi);
 	fclose(fpo);
-	free(num_cls);
 	for(int a=0;a<*num_cls;a++){
 		free(color_arr[a]);
 	}
 	free(color_arr);
+	free(num_cls);
 	return 0;
 }
 
