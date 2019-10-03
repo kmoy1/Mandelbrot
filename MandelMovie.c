@@ -44,7 +44,7 @@ void convertToColorAndWrite(u_int64_t* image, uint8_t** colormap, FILE* fp, u_in
 	int sqr_dims = sqrt((double)(sz));
 	int zeros[3] = {0,0,0};
 	printf("SIZE SZ: %lu\n", sz);
-
+	printf("NUM_COLORS: %d\n", num_colors);
 	fprintf(fp, "P6 %d %d %d\n", sqr_dims, sqr_dims, 255);//print header.
 	for(int i=0;i<sz;i++){
 		pixel = *(image+i);
@@ -69,7 +69,7 @@ void convertToColorAndWrite(u_int64_t* image, uint8_t** colormap, FILE* fp, u_in
 **It then uses the color array from FileToColorMap to create PPM images for each frame, and stores it in output_folder
 ***************/
 int main(int argc, char* argv[])
-{
+{	
 	//Tips on how to get started on main function: 
 	//MandelFrame also follows a similar sequence of steps; it may be useful to reference that.
 	//Mayke you complete the steps below in order. 
