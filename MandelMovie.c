@@ -131,6 +131,7 @@ int main(int argc, char* argv[])
 		fclose(ofp);
 		free(colormap);
 		free(color_count);
+		freeComplexNumber(c_ptr);
 		return 1;
 	}
 
@@ -158,6 +159,9 @@ int main(int argc, char* argv[])
 		ofp = fopen(ppmPATH, "w");//Create new file.
 		if(ofp==NULL){
 			printf("fopen failed\n");
+			free(colormap);
+			free(color_count);	
+			freeComplexNumber(c_ptr);
 			return 1;
 		}
 		free(iterationImage);
@@ -171,6 +175,11 @@ int main(int argc, char* argv[])
 	/*
 	Make sure there's no memory leak.
 	*/
+	freeComplexNumber(c_ptr);
+	for(int s=0;s<*color_count;s++){
+		free(colormap[s]);
+	}
+	
 	free(colormap);
 	free(color_count);
 	free(output);
