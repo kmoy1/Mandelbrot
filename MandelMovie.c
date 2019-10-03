@@ -46,6 +46,7 @@ void convertToColorAndWrite(u_int64_t* image, uint8_t** colormap, FILE* fp, u_in
 	for(int i=0;i<sz;i++){
 		if(*(image+i)>num_colors){
 			pixel = *(image+i) % num_colors;
+			printf("Current ASCII num: %lu\n", pixel);
 			fwrite(colormap[pixel],1,3,fp);
 		}
 		else{
