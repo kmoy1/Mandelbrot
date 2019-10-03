@@ -126,7 +126,7 @@ int main(int argc, char* argv[])
      	char ppmPATH[strlen(file)+strlen(frameEnd)]; //string for creating new file location.
 		sprintf(ppmPATH, "%s/frame%05d.ppm", file, i);
 		printf("Adding file %s\n", ppmPATH);
-		ofp = fopen(ppmPATH, "w+");//Create new file.
+		ofp = fopen(ppmPATH, "w");//Create new file.
 		if(ofp==NULL){
 			printf("fopen failed\n");
 			return 1;
